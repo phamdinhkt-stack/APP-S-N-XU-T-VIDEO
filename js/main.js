@@ -20,6 +20,33 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+// Click-to-play product thumbnail videos (SEO-friendly: poster shown until clicked)
+// Opens fullscreen (16:9) so long demo videos aren't cramped inside the page layout.
+document.querySelectorAll('.video-thumb').forEach(thumb => {
+  const btn = thumb.querySelector('.play-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const media = thumb.querySelector('.thumb-media');
+    const video = document.createElement('video');
+    video.src = thumb.dataset.video;
+    video.poster = thumb.dataset.poster;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    media.innerHTML = '';
+    media.appendChild(video);
+    video.play().catch(() => {});
+
+    // Must call synchronously in the click handler, or browsers drop the
+    // "user gesture" and silently block the fullscreen request.
+    const req = video.requestFullscreen || video.webkitRequestFullscreen || video.webkitEnterFullscreen;
+    if (req) {
+      const result = req.call(video);
+      if (result && result.catch) result.catch(() => {});
+    }
+  });
+});
+
 // Reveal QR payment panel on "Mua Ngay" click
 document.querySelectorAll('.buy-toggle').forEach(btn => {
   const originalLabel = btn.textContent;
