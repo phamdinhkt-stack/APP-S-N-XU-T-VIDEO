@@ -32,9 +32,10 @@
   .cta-pulse { animation: pulse 2.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,138,61,.55); } 50% { box-shadow: 0 0 0 14px rgba(255,138,61,0); } }
   .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .marquee-track { display: flex; width: max-content; animation: scroll 45s linear infinite; }
+  .marquee-track { display: flex; width: max-content; animation: scroll 70s linear infinite; }
+  .marquee.dung .marquee-track { animation-play-state: paused; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes scroll { to { transform: translateX(-50%); } }
+  @keyframes scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
   .blob { position: absolute; border-radius: 9999px; filter: blur(110px); opacity: .22; pointer-events: none; }
   details > summary::-webkit-details-marker { display: none; }
   /* Chỗ cần điền số liệu thật – nhìn thấy rõ để không quên thay trước khi chạy quảng cáo */
@@ -42,7 +43,7 @@
   .no-draft .can-dien { outline: none; background: none; padding: 0; }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .marquee-track, .cta-pulse { animation: none; } .reveal { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation-duration: 120s; } .cta-pulse { animation: none; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
@@ -197,6 +198,7 @@
   <!-- Dải 10 dạng video -->
   <section class="py-10 reveal">
     <h2 class="text-center text-xl sm:text-3xl font-black px-4">10 dạng video viral bạn sẽ <span class="text-grad">tự làm được</span></h2>
+    <p class="text-center text-sm text-slate-400 mt-2 px-4">👆 Bấm vào từng dạng để xem video minh hoạ do AI làm</p>
     <div class="marquee mt-8">
       <div class="marquee-track" id="marquee"></div>
     </div>
@@ -510,6 +512,22 @@
   </footer>
 </main>
 
+<!-- Cửa sổ xem video minh hoạ -->
+<div id="vd-modal" class="hidden fixed inset-0 z-[80] bg-black/80 backdrop-blur-sm items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="vd-ten">
+  <div class="card rounded-3xl w-full max-w-4xl max-h-full overflow-y-auto grid md:grid-cols-[minmax(0,320px)_1fr]">
+    <div class="bg-black aspect-[9/16] md:aspect-auto md:min-h-[560px] relative" id="vd-khung"></div>
+    <div class="p-5 sm:p-7 relative">
+      <button id="vd-dong" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-lg" aria-label="Đóng">✕</button>
+      <p class="text-xs font-bold uppercase tracking-widest text-gold" id="vd-nhom"></p>
+      <h3 class="mt-1 text-2xl font-black pr-10" id="vd-ten"></h3>
+      <p class="mt-3 text-slate-300 leading-relaxed" id="vd-gioi-thieu"></p>
+      <p class="mt-5 text-sm font-black text-white">Bạn sẽ học được:</p>
+      <ul class="mt-2 space-y-2 text-sm text-slate-200" id="vd-hoc"></ul>
+      <a href="#dang-ky" id="vd-cta" class="mt-6 inline-flex w-full justify-center rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4 text-sm text-center">⚡ Tôi muốn tự làm được video như thế này</a>
+    </div>
+  </div>
+</div>
+
 <!-- Sticky CTA trên điện thoại -->
 <div id="sticky-cta" class="sm:hidden fixed bottom-0 inset-x-0 z-50 p-3 bg-ink/95 backdrop-blur border-t border-line transition-transform">
   <a href="#dang-ky" class="flex items-center justify-between gap-3 rounded-2xl bg-cta text-ink px-4 py-3">
@@ -546,17 +564,18 @@ const CONFIG = {
   phanHoi: [],
 };
 
+// [ảnh, tên, mô tả ngắn, nhóm, giới thiệu, bạn sẽ học, link video Google Drive / YouTube / TikTok]
 const DANG_VIDEO = [
-  ['v-giadung.jpg', 'Đồ gia dụng', 'Review sản phẩm chốt đơn liên tục'],
-  ['v-doan.jpg', 'Đồ ăn', 'Món ăn ngon mắt, kích thích vị giác'],
-  ['v-nauan.jpg', 'Hướng dẫn nấu ăn', 'Công thức từng bước, dễ lên xu hướng'],
-  ['v-batdongsan.jpg', 'Bất động sản', 'Tour nhà, dự án sang trọng'],
-  ['v-tvc.jpg', 'TVC quảng cáo', 'Phong cách điện ảnh chỉ với AI'],
-  ['v-thuonghieu.jpg', 'Thương hiệu cá nhân', 'Xây uy tín không cần lên hình'],
-  ['v-mebe.jpg', 'Mẹ và bé', 'Ấm áp, thu hút cộng đồng các mẹ'],
-  ['v-dongvat.jpg', 'Thế giới động vật', 'Phim tài liệu hoang dã hùng vĩ'],
-  ['v-thucung.jpg', 'Thú cưng', 'Chó mèo hài hước, dễ triệu view'],
-  ['v-drama.jpg', 'Phim ngắn drama', 'Cuốn hút, giữ chân đến tập cuối'],
+  ['v-giadung.jpg', 'Đồ gia dụng', 'Review sản phẩm chốt đơn liên tục', 'Bán hàng', 'Biến từng món đồ gia dụng thành video review hấp dẫn, khiến người xem muốn mua ngay mà không cần quay thật.', ['Kịch bản review 30 giây chuẩn chốt đơn', 'Dựng cảnh bếp, phòng khách bằng AI', 'Gắn giỏ hàng TikTok Shop / Shopee'], 'https://drive.google.com/file/d/1YhsxJwfUw9ImrDi0_BSxXFVUm13mS-aI/view'],
+  ['v-doan.jpg', 'Đồ ăn', 'Món ăn ngon mắt, kích thích vị giác', 'Bán hàng', 'Làm video đồ ăn bốc khói, cận cảnh đẹp như quảng cáo để bán online hoặc kéo khách về quán.', ['Prompt tạo cảnh món ăn cận cảnh', 'Hiệu ứng khói, nước sốt chuyển động', 'Công thức hook 3 giây đầu'], 'https://drive.google.com/file/d/1xzQFxywAiJE_SuQ_tfHPzC2ZJGLyE9R4/view'],
+  ['v-nauan.jpg', 'Hướng dẫn nấu ăn', 'Công thức từng bước, dễ lên xu hướng', 'Bán hàng', 'Tạo series video dạy nấu ăn từng bước, xây kênh và gắn link bán nguyên liệu, dụng cụ bếp.', ['Chia kịch bản công thức theo bước', 'Giọng đọc AI tự nhiên', 'Gắn tiếp thị liên kết dụng cụ bếp'], 'https://drive.google.com/file/d/1xy3uKP787iJq316nwDkJHPDu6_wC2w9J/view'],
+  ['v-batdongsan.jpg', 'Bất động sản', 'Tour nhà, dự án sang trọng', 'Bán hàng', 'Dựng video giới thiệu căn hộ, dự án như flycam – không cần đội quay, vẫn sang trọng thu hút khách.', ['Video tour căn hộ từ ảnh tĩnh', 'Chuyển động camera điện ảnh', 'Kịch bản thu thông tin khách hàng'], 'https://drive.google.com/file/d/1x0qRK4nMja9-sZeXBKsr1FhUucZhSwfR/view'],
+  ['v-tvc.jpg', 'TVC quảng cáo', 'Phong cách điện ảnh chỉ với AI', 'Bán hàng', 'Làm TVC quảng cáo phong cách điện ảnh cho thương hiệu, nhận job làm video giá cao.', ['Storyboard TVC chuyên nghiệp', 'Giữ nhân vật đồng nhất qua các cảnh', 'Âm nhạc, chỉnh màu điện ảnh'], 'https://drive.google.com/file/d/1gj7LVLE5fhWNmbsgL4hiMjZIGYklUeai/view'],
+  ['v-thuonghieu.jpg', 'Thương hiệu cá nhân', 'Xây uy tín không cần lên hình', 'Xây kênh', 'Xây thương hiệu cá nhân bằng avatar AI của chính bạn – ra video mỗi ngày không cần lên hình.', ['Tạo avatar AI giống bạn', 'Kịch bản chia sẻ giá trị', 'Lịch đăng bài xây kênh mỗi ngày'], 'https://drive.google.com/file/d/1ie6NhAlZR2cO0nRqunx1gDovAeURsNen/view'],
+  ['v-mebe.jpg', 'Mẹ và bé', 'Ấm áp, thu hút cộng đồng các mẹ', 'Xây kênh', 'Làm kênh mẹ và bé với nội dung ấm áp, dễ viral, bán sản phẩm cho mẹ và bé.', ['Ý tưởng video mẹ bé dễ viral', 'Tạo nhân vật em bé đáng yêu', 'Kiếm tiền từ tiếp thị liên kết mẹ bé'], 'https://drive.google.com/file/d/1VY0yv9ITcw7AZ3Gdj1uvv2T164WvmHwg/view'],
+  ['v-dongvat.jpg', 'Thế giới động vật', 'Phim tài liệu hoang dã hùng vĩ', 'Xây kênh', 'Xây kênh thế giới động vật phong cách tài liệu – kiếm tiền từ lượt xem YouTube, TikTok, Facebook.', ['Cảnh hoang dã chân thực', 'Lời dẫn tài liệu hấp dẫn', 'Tối ưu kênh để bật kiếm tiền'], 'https://drive.google.com/file/d/1ixWXLM3LvexvqkqUWxJsh4TY5TeMRM4M/view'],
+  ['v-thucung.jpg', 'Thú cưng', 'Chó mèo hài hước, dễ triệu view', 'Xây kênh', 'Làm video thú cưng dễ thương, hài hước – thể loại luôn được yêu thích và dễ lên xu hướng.', ['Tình huống hài hước cho thú cưng', 'Lồng tiếng, biểu cảm vui nhộn', 'Bán đồ thú cưng qua video'], 'https://drive.google.com/file/d/1CeffGmdQjp1aUc3N0KfZCxGkR4WZkzT1/view'],
+  ['v-drama.jpg', 'Phim ngắn drama', 'Cuốn hút, giữ chân đến tập cuối', 'Xây kênh', 'Sản xuất phim ngắn drama nhiều tập bằng AI – nội dung gây nghiện, giữ chân người xem đến tập cuối.', ['Viết kịch bản drama nhiều tập', 'Nhân vật đồng nhất xuyên suốt', 'Cắt dựng tạo cao trào'], ''],
 ];
 
 window.CRM = { url: CONFIG.supabaseUrl.replace(/\/$/, ''), key: CONFIG.supabaseKey };
@@ -589,11 +608,51 @@ if (!CONFIG.hienChoCanDien) document.body.classList.add('no-draft');
 document.getElementById('nam').textContent = new Date().getFullYear();
 
 // Dải 10 dạng video
-document.getElementById('marquee').innerHTML = [...DANG_VIDEO, ...DANG_VIDEO].map(([img, ten, mo]) => `
-  <div class="mr-4 w-48 sm:w-56 shrink-0 card rounded-2xl overflow-hidden">
-    <img src="images/${img}" alt="Video ${ten} làm bằng AI" loading="lazy" class="w-full aspect-[3/4] object-cover">
+document.getElementById('marquee').innerHTML = [...DANG_VIDEO, ...DANG_VIDEO].map(([img, ten, mo, , , , link], i) => `
+  <button type="button" data-vd="${i % DANG_VIDEO.length}" ${i >= DANG_VIDEO.length ? 'tabindex="-1" aria-hidden="true"' : ''} class="group mr-4 w-48 sm:w-56 shrink-0 card rounded-2xl overflow-hidden text-left hover:border-gold transition">
+    <div class="relative overflow-hidden">
+      <img src="images/${img}" alt="Video ${ten} làm bằng AI" loading="lazy" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition duration-500">
+      <span class="absolute inset-0 flex items-center justify-center"><span class="w-14 h-14 rounded-full bg-black/55 border-2 border-white/80 flex items-center justify-center text-white text-xl pl-1 group-hover:bg-flame group-hover:border-flame transition">▶</span></span>
+      ${link ? '' : '<span class="absolute top-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-bold">Sắp có video</span>'}
+    </div>
     <div class="p-3"><p class="font-black">${ten}</p><p class="text-xs text-slate-400 mt-0.5">${mo}</p></div>
-  </div>`).join('');
+  </button>`).join('');
+
+// Bấm vào dạng video -> mở cửa sổ xem video minh hoạ
+const nhung = link => {
+  let m;
+  if ((m = link.match(/drive\.google\.com\/file\/d\/([^/?#]+)/))) return `https://drive.google.com/file/d/${m[1]}/preview`;
+  if ((m = link.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/))) return `https://www.youtube.com/embed/${m[1]}`;
+  if ((m = link.match(/tiktok\.com\/.*video\/(\d+)/))) return `https://www.tiktok.com/embed/v2/${m[1]}`;
+  return '';
+};
+const modal = document.getElementById('vd-modal'), marquee = document.querySelector('.marquee');
+function moVideo(i) {
+  const [img, ten, , nhom, gioiThieu, hoc, link] = DANG_VIDEO[i];
+  const src = link && nhung(link);
+  document.getElementById('vd-khung').innerHTML = src
+    ? `<iframe src="${src}" title="Video minh hoạ ${esc(ten)}" class="absolute inset-0 w-full h-full" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`
+    : `<img src="images/${img}" alt="" class="absolute inset-0 w-full h-full object-cover opacity-60"><span class="absolute inset-0 flex items-center justify-center text-center p-6 font-bold">🎬 Video minh hoạ đang được cập nhật</span>`;
+  document.getElementById('vd-nhom').textContent = 'Dạng video ' + nhom.toLowerCase();
+  document.getElementById('vd-ten').textContent = ten;
+  document.getElementById('vd-gioi-thieu').textContent = gioiThieu;
+  document.getElementById('vd-hoc').innerHTML = hoc.map(h => `<li class="flex gap-2"><span class="text-gold">✔</span>${esc(h)}</li>`).join('');
+  modal.classList.remove('hidden'); modal.classList.add('flex');
+  marquee.classList.add('dung'); document.body.style.overflow = 'hidden';
+}
+function dongVideo() {
+  modal.classList.add('hidden'); modal.classList.remove('flex');
+  document.getElementById('vd-khung').innerHTML = '';
+  marquee.classList.remove('dung'); document.body.style.overflow = '';
+}
+document.getElementById('marquee').addEventListener('click', e => { const b = e.target.closest('[data-vd]'); if (b) moVideo(+b.dataset.vd); });
+document.getElementById('vd-dong').onclick = dongVideo;
+document.getElementById('vd-cta').onclick = dongVideo;
+modal.addEventListener('click', e => { if (e.target === modal) dongVideo(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) dongVideo(); });
+// Trên điện thoại: chạm vào dải video thì tạm dừng cho dễ bấm
+marquee.addEventListener('touchstart', () => marquee.classList.add('dung'), { passive: true });
+marquee.addEventListener('touchend', () => setTimeout(() => { if (modal.classList.contains('hidden')) marquee.classList.remove('dung'); }, 1500));
 
 // Phản hồi học viên
 if (!CONFIG.phanHoi.length) document.getElementById('phan-hoi').remove();
