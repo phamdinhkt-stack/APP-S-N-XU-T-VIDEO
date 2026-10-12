@@ -11,6 +11,8 @@
     zaloCaNhan: 'https://zalo.me/0915244329',
     // Kết nối CRM (Supabase): lấy từ CONFIG trong index.html
     crm: window.CRM || null,
+    // true = dùng câu trả lời sửa trong trang quản trị (Supabase). Tạm tắt cho tới khi cập nhật bản trên Supabase.
+    dungKichBanQuanTri: false,
     // Số giây chờ trước khi trợ lý chủ động chào khách
     chaoSau: 12,
   };
@@ -25,11 +27,8 @@
     { id: 'chao', tu: ['xin chao', 'chao', 'hello', 'hi', 'alo', 'co ai khong', 'shop oi', 'ad oi'],
       tra: ['Dạ Mai chào {ten} ạ 🌷 Rất vui vì mình ghé xem chương trình. Mình đang muốn tìm hiểu về giá, lộ trình học hay đang băn khoăn mình có làm được không ạ?',
             'Chào {ten} nha 👋 Mai ở đây nè. Mình cứ hỏi thoải mái, chuyện gì về chương trình Đồng Hành 30 Ngày Mai cũng giải đáp được ạ.'] },
-    { id: 'khach_cu', tu: ['khach cu', 'da mua', 'mua roi', 'tri an', '999'],
-      tra: ['Dạ, cảm ơn {ten} đã tin tưởng đồng hành từ trước 💛 Với khách hàng cũ (đã từng mua app hoặc khoá học), học phí chỉ còn <b>999.000đ</b> thay vì 1.499.000đ. Khi điền form đăng ký, mình chọn ô <b>"Khách hàng cũ"</b> là hệ thống tự ra mã QR đúng số tiền ạ.'],
-      nut: ['Đăng ký ngay', 'Có hoàn tiền không?'] },
     { id: 'gia', tu: ['gia', 'bao nhieu', 'hoc phi', 'chi phi', 'bao tien', 'nhieu tien', 'dat khong', 'dat qua'],
-      tra: ['Dạ, chương trình có giá niêm yết 2.999.000đ, nhưng đăng ký trong thời gian ưu đãi chỉ còn <b>1.499.000đ</b> (tiết kiệm 50%). Nếu mình là khách hàng cũ thì còn <b>999.000đ</b> thôi ạ.<br><br>Mai nói thật lòng nhé: chỉ cần 1 video lên xu hướng mang về 2–3 đơn là mình đã hoà vốn rồi, mà hệ thống thì dùng được mãi. Lại còn được hoàn tiền 100% trong 7 ngày nếu không thấy hữu ích nữa ạ 😊'],
+      tra: ['Dạ, chương trình có giá niêm yết 2.999.000đ, đợt này đăng ký chỉ còn <b>1.499.000đ</b> (tiết kiệm 50%) cho 30 học viên đầu tiên ạ.<br><br>Mai nói thật lòng nhé: chỉ cần 1 video lên xu hướng mang về 2–3 đơn là mình đã hoà vốn rồi, mà hệ thống thì dùng được mãi. Lại còn được hoàn tiền 100% trong 7 ngày nếu không thấy hữu ích nữa ạ 😊'],
       nut: ['Gồm những gì?', 'Đăng ký ngay'] },
     { id: 'hoan_tien', tu: ['hoan tien', 'hoan lai', 'bao hanh', 'khong hai long', 'rui ro', 'lua dao', 'uy tin', 'tin duoc khong'],
       tra: ['Mai hiểu mà, bỏ tiền ra học online ai cũng sợ "mua xong bị bỏ rơi" 🥲 Nên chương trình cam kết rõ: <b>hoàn tiền 100% trong 7 ngày</b>, không cần giải thích lý do. Mình cứ vào học buổi Zoom đầu, nhận tài liệu, dùng thử tool – thấy không hợp thì nhắn Zalo là được hoàn lại toàn bộ ạ. Rủi ro là của bên mình, không phải của {ten} đâu.'],
@@ -56,10 +55,10 @@
       tra: ['Câu hỏi rất đáng hỏi ạ 👍 Chị Dinh đã tự kiểm chứng trên chính mình: mở <b>2 kênh mới tinh</b>, không quảng cáo, không người theo dõi, chỉ sau <b>5 ngày</b> đã vượt <b>2,2 triệu lượt xem</b> – có video đạt 1,3 triệu view. Ảnh chụp màn hình thật có ngay trên trang này đó ạ.<br><br>Mai không dám hứa video nào cũng triệu view, vì còn tuỳ mình có làm bài đều không. Nhưng mình làm đúng hệ thống và có người sửa bài 1:1 thì cơ hội rất lớn ạ 💛'],
       nut: ['Có hoàn tiền không?', 'Đăng ký ngay'] },
     { id: 'lich', tu: ['khi nao', 'bat dau', 'khai giang', 'lich hoc', 'ngay nao', 'con suat', 'con cho', 'het han', 'may gio'],
-      tra: ['Dạ, đợt này chỉ nhận <b>30 học viên</b> để đảm bảo sửa bài 1:1 cho từng người, và giá ưu đãi 1.499.000đ chỉ áp dụng trong thời gian đếm ngược trên trang thôi ạ. Sau khi mình đăng ký và chuyển khoản, bên mình thêm mình vào nhóm học riêng, lịch Zoom cụ thể được gửi trong nhóm ạ.'],
+      tra: ['Dạ, đợt này chỉ nhận <b>30 học viên</b> để đảm bảo sửa bài 1:1 cho từng người, giá ưu đãi 1.499.000đ chỉ áp dụng cho 30 học viên đầu tiên của đợt này thôi ạ. Sau khi mình đăng ký và chuyển khoản, bên mình thêm mình vào nhóm học riêng, lịch Zoom cụ thể được gửi trong nhóm ạ.'],
       nut: ['Đăng ký ngay', 'Vào nhóm Zalo'] },
     { id: 'thanh_toan', tu: ['thanh toan', 'chuyen khoan', 'dang ky', 'mua', 'qr', 'so tai khoan', 'stk', 'tham gia', 'giu suat', 'chot'],
-      tra: ['Tuyệt vời quá {ten} ơi 🎉 Mình chỉ cần kéo xuống phần <b>Đăng ký giữ suất</b>, điền họ tên, số Zalo và chọn Học viên mới hoặc Khách hàng cũ. Trang sẽ hiện ngay mã QR đúng số tiền, mình quét bằng app ngân hàng là xong. Chuyển khoản xong gửi ảnh qua Zalo để bên mình xếp lịch học nhé ạ.'],
+      tra: ['Tuyệt vời quá {ten} ơi 🎉 Mình chỉ cần kéo xuống phần <b>Đăng ký giữ suất</b>, điền họ tên và số Zalo. Trang sẽ hiện ngay mã QR đúng số tiền, mình quét bằng app ngân hàng là xong. Chuyển khoản xong gửi ảnh qua Zalo để bên mình xếp lịch học nhé ạ.'],
       nut: ['Mở form đăng ký'] },
     { id: 'zalo', tu: ['zalo', 'nhom', 'lien he', 'so dien thoai', 'sdt', 'hotline', 'goi dien', 'tu van truc tiep'],
       tra: ['Dạ, mình vào nhóm Zalo riêng để nhận quà tặng và được tư vấn trực tiếp nhé {ten} 💬 Trong nhóm còn có tài liệu, video mẫu và giải đáp thường xuyên. Hoặc mình gọi/nhắn Zalo <b>0915 244 329</b> cũng được ạ.'],
@@ -205,7 +204,7 @@
   // Tải kịch bản trả lời bạn sửa trong trang quản trị (lỗi thì dùng kịch bản có sẵn)
   const sangHtml = t => String(t).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
   const tach = t => String(t || '').split(',').map(x => x.trim()).filter(Boolean);
-  if (crm) {
+  if (crm && TRO_LY.dungKichBanQuanTri) {
     fetch(`${crm.url}/rest/v1/tra_loi_tu_dong?bat=eq.true&order=thu_tu.asc&select=*`, { headers: hdr() })
       .then(r => r.ok ? r.json() : [])
       .then(ds => {
