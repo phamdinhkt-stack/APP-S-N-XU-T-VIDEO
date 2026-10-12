@@ -180,15 +180,15 @@ function napDuLieuMau() {
   DB.khach_hang = [
     { id: 'd1', created_at: t(1), ho_ten: 'Khách mẫu A', sdt: '0900000001', nganh: 'Mỹ phẩm', nhu_cau: 'Muốn làm video bán serum không cần lộ mặt', goi: 'Học viên mới (1.499k)', so_tien: 1499000, nguon: 'Facebook', kenh: 'Chat + Form', trang_thai: 'Chờ chuyển khoản', phan_loai: 'Nóng', ngay_cham_soc: homNay(), ghi_chu: '' },
     { id: 'd2', created_at: t(5), ho_ten: 'Khách mẫu B', sdt: '0900000002', nganh: 'Bất động sản', nhu_cau: 'Cần video tour dự án', goi: '', so_tien: null, nguon: 'TikTok', kenh: 'Chat', trang_thai: 'Mới', phan_loai: 'Ấm', ngay_cham_soc: homNay(), ghi_chu: '' },
-    { id: 'd3', created_at: t(30), ho_ten: 'Khách mẫu C', sdt: '0900000003', nganh: 'Ẩm thực', nhu_cau: '', goi: 'Khách hàng cũ (999k)', so_tien: 999000, nguon: 'Zalo', kenh: 'Form', trang_thai: 'Đã chuyển khoản', phan_loai: 'Nóng', ngay_cham_soc: congNgay(2), ghi_chu: 'Đã mua App Đa Ngành' },
-    { id: 'd4', created_at: t(60), ho_ten: 'Khách mẫu D', sdt: '0900000004', nganh: 'Thời trang', nhu_cau: 'Hỏi giá', goi: '', so_tien: null, nguon: 'Trực tiếp', kenh: 'Chat', trang_thai: 'Đã liên hệ', phan_loai: 'Lạnh', ngay_cham_soc: congNgay(5), ghi_chu: 'Hẹn tháng sau' },
+    { id: 'd3', created_at: t(30), ho_ten: 'Khách mẫu C', sdt: '0900000003', nganh: 'Ẩm thực', nhu_cau: '', goi: 'Học viên mới (1.499k)', so_tien: 1499000, nguon: 'Zalo', kenh: 'Form', trang_thai: 'Đã chuyển khoản', phan_loai: 'Nóng', ngay_cham_soc: congNgay(2), ghi_chu: 'Đã mua App Đa Ngành' },
+    { id: 'd4', created_at: t(60), ho_ten: 'Khách mẫu D', sdt: '0900000004', nganh: 'Tiếp thị liên kết (affiliate)', nhu_cau: 'Muốn làm video gắn giỏ hàng TikTok Shop', goi: '', so_tien: null, nguon: 'Trực tiếp', kenh: 'Chat', trang_thai: 'Đã liên hệ', phan_loai: 'Lạnh', ngay_cham_soc: congNgay(5), ghi_chu: 'Hẹn tháng sau' },
   ];
   DB.hoi_thoai = [
     { id: 'h1', created_at: t(1), updated_at: t(1), phien: 'demo-1', sdt: '0900000001', nguon: 'Facebook', tin_nhan: [{ role: 'model', text: 'Chào bạn, Mai có thể giúp gì ạ?' }, { role: 'user', text: 'Học phí bao nhiêu vậy?' }, { role: 'model', text: 'Dạ, ưu đãi hôm nay chỉ còn 1.499.000đ ạ…' }, { role: 'user', text: 'số mình 0900000001' }] },
     { id: 'h2', created_at: t(8), updated_at: t(8), phien: 'demo-2', sdt: null, nguon: 'TikTok', tin_nhan: [{ role: 'model', text: 'Chào bạn…' }, { role: 'user', text: 'mình bán bất động sản có làm được không' }] },
   ];
   DB.tra_loi_tu_dong = [
-    { id: 'r1', thu_tu: 40, chu_de: 'Học phí', tu_khoa: 'giá, bao nhiêu, học phí, chi phí', tra_loi: 'Dạ, ưu đãi hôm nay chỉ còn **1.499.000đ**, khách cũ **999.000đ** ạ.', goi_y: 'Gồm những gì?, Đăng ký ngay', nut_zalo: false, bat: true },
+    { id: 'r1', thu_tu: 40, chu_de: 'Học phí', tu_khoa: 'giá, bao nhiêu, học phí, chi phí', tra_loi: 'Dạ, đợt này chỉ còn **1.499.000đ** (tiết kiệm 50%) ạ.', goi_y: 'Gồm những gì?, Đăng ký ngay', nut_zalo: false, bat: true },
     { id: 'r2', thu_tu: 50, chu_de: 'Hoàn tiền', tu_khoa: 'hoàn tiền, uy tín, rủi ro', tra_loi: 'Mình được **hoàn tiền 100% trong 7 ngày**, không cần lý do ạ.', goi_y: '', nut_zalo: true, bat: true },
   ];
 }
@@ -324,7 +324,7 @@ function veKhach() {
         <div class="flex gap-1">${[1, 3, 7].map(n => `<button class="flex-1 rounded-lg border border-line py-1 text-xs" data-hen="${n}">+${n} ngày</button>`).join('')}</div>
       </div>
       <div>
-        <label class="block text-xs text-slate-400">Ghi chú chăm sóc<textarea class="inp mt-1" rows="3" data-f="ghi_chu" placeholder="Ví dụ: hẹn tối gọi lại, quan tâm gói khách cũ…">${esc(k.ghi_chu)}</textarea></label>
+        <label class="block text-xs text-slate-400">Ghi chú chăm sóc<textarea class="inp mt-1" rows="3" data-f="ghi_chu" placeholder="Ví dụ: hẹn tối gọi lại, làm affiliate TikTok Shop…">${esc(k.ghi_chu)}</textarea></label>
         <button class="mt-2 rounded-lg bg-cta text-ink font-black px-3 py-1.5 text-sm" data-act="mau">✍️ Mẫu tin nhắn chăm sóc</button>
         <div class="mau hidden mt-2 rounded-xl border border-dashed border-gold p-3 text-sm whitespace-pre-wrap"></div>
       </div>
