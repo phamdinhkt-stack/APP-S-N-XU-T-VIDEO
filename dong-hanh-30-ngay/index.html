@@ -440,9 +440,10 @@
 
   <!-- ===== 13. BẰNG CHỨNG XÁC THỰC ===== -->
   <section id="phan-hoi" class="max-w-6xl mx-auto px-4 py-14 reveal">
-    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-gold">Kết quả từ học viên</p>
-    <h2 class="mt-3 text-center text-2xl sm:text-4xl font-black">Họ đã làm được, <span class="text-grad">bạn cũng sẽ làm được</span></h2>
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="testimonials"></div>
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-gold">Phản hồi thật từ khách hàng</p>
+    <h2 class="mt-3 text-center text-2xl sm:text-4xl font-black uppercase leading-tight">Khách hàng nói gì<br><span class="inline-block mt-2 bg-gold text-ink px-3 rounded-lg">khi được Dinh đồng hành</span></h2>
+    <p class="mt-4 text-center text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">Ảnh chụp tin nhắn thật từ khách đã dùng app AI làm video và được Dinh hỗ trợ trực tiếp. Tên và ảnh đại diện đã được che để giữ riêng tư cho khách.</p>
+    <div class="mt-10 columns-1 sm:columns-2 lg:columns-3 gap-4" id="testimonials"></div>
   </section>
 
   <!-- ===== 14 + 15. VALUE STACK, BÁO GIÁ 2 BƯỚC, QUÀ TẶNG ===== -->
@@ -639,10 +640,16 @@ const CONFIG = {
   // Đổi thành false sau khi đã thay hết.
   hienChoCanDien: true,
 
-  // Phản hồi khách hàng THẬT: đặt ảnh chụp tin nhắn Zalo/Messenger vào thư mục images/ rồi thêm dòng như:
-  // { ten: 'Chị Hoa', nghe: 'Shop mỹ phẩm', ketQua: '120.000 lượt xem', loi: 'Nguyên văn lời khen', anh: 'phan-hoi-1.jpg' },
-  // Danh sách trống thì phần "Phản hồi học viên" tự ẩn.
-  phanHoi: [],
+  // Phản hồi khách hàng THẬT: ảnh chụp tin nhắn trong thư mục images/ + câu trích nguyên văn từ ảnh.
+  // Danh sách trống thì phần "Phản hồi" tự ẩn.
+  phanHoi: [
+    { nhan: 'Dễ dùng', loi: 'Cái của b tạo video đồ ăn OK lắm. Mới làm quen thôi nhưng thấy dễ', anh: 'phan-hoi-1.jpg' },
+    { nhan: 'Hết cạn ý tưởng', loi: 'Quá nhàn luôn, app đưa ra 10 ý tưởng tha hồ chọn, mà toàn ý tưởng chất lượng.', anh: 'phan-hoi-5.jpg' },
+    { nhan: 'Hỗ trợ nhiệt tình', loi: 'Bà là nhiệt tình nhất trong những người tôi mua sản phẩm. Support liên tục trên nhóm', anh: 'phan-hoi-2.jpg' },
+    { nhan: 'Đồng hành tận tâm', loi: 'Có giỏi cách mấy mà k có ng hỗ trợ cũng mệt lắm á c. Gặp c xem như e có quý nhân', anh: 'phan-hoi-3.jpg' },
+    { nhan: 'Chất lượng video', loi: 'Nó ngon đó c, voice cũng đồng bộ hơn', anh: 'phan-hoi-6.jpg' },
+    { nhan: 'Đáng đồng tiền', loi: 'Ở đời không có cái gì "Ngon, bổ, rẻ" mà e cảm nhận thấy sản phẩm của chị đạt được tiêu chí này á.', anh: 'phan-hoi-4.jpg' },
+  ],
 };
 
 // [ảnh, tên, mô tả ngắn, nhóm, giới thiệu, bạn sẽ học, link video Google Drive / YouTube / TikTok]
@@ -735,18 +742,16 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.cla
 marquee.addEventListener('touchstart', () => marquee.classList.add('dung'), { passive: true });
 marquee.addEventListener('touchend', () => setTimeout(() => { if (modal.classList.contains('hidden')) marquee.classList.remove('dung'); }, 1500));
 
-// Phản hồi học viên
+// Phản hồi khách hàng (ảnh chụp tin nhắn thật)
 if (!CONFIG.phanHoi.length) document.getElementById('phan-hoi').remove();
 else document.getElementById('testimonials').innerHTML = CONFIG.phanHoi.map(p => `
-  <figure class="card rounded-3xl overflow-hidden flex flex-col">
-    ${p.anh
-      ? `<img src="images/${esc(p.anh)}" alt="Ảnh kết quả của ${esc(p.ten)}" loading="lazy" class="w-full aspect-[9/12] object-cover object-top">`
-      : `<div class="aspect-[9/12] bg-navy flex flex-col items-center justify-center text-center p-6 border-b border-line"><span class="text-4xl">📱</span><span class="can-dien mt-3 text-sm text-slate-300">[Ảnh chụp màn hình lượt xem TikTok / Reels thật]</span></div>`}
-    <div class="p-5 flex-1 flex flex-col">
-      <p class="text-gold">★★★★★</p>
-      <blockquote class="mt-2 text-sm text-slate-200 leading-relaxed flex-1">“${o(p.loi)}”</blockquote>
-      <figcaption class="mt-4 text-sm"><b>${o(p.ten, 'text-white')}</b> · ${o(p.nghe, 'text-slate-400')}<br><span class="text-gold font-bold">${o(p.ketQua)}</span></figcaption>
+  <figure class="card rounded-3xl overflow-hidden mb-4 break-inside-avoid">
+    <div class="p-5">
+      <span class="inline-block rounded-full bg-gold/15 border border-gold/40 text-gold2 text-xs font-bold px-3 py-1">${esc(p.nhan)}</span>
+      <blockquote class="mt-3 text-base font-semibold text-white leading-relaxed">“${esc(p.loi)}”</blockquote>
+      <p class="mt-2 text-gold text-sm">★★★★★</p>
     </div>
+    <img src="images/${esc(p.anh)}" alt="Ảnh chụp tin nhắn của khách: ${esc(p.loi)}" loading="lazy" class="w-full border-t border-line">
   </figure>`).join('');
 
 // Đếm ngược tới hạn cố định (để trống hanUuDai thì ẩn hết phần đếm ngược)
