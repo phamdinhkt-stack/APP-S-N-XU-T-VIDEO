@@ -98,7 +98,7 @@
 
     <!-- TIN NHẮN -->
     <div data-pane="tin-nhan" class="hidden">
-      <p class="text-sm text-slate-400">Mọi cuộc trò chuyện khách đã nhắn với trợ lý Mai trên website. Khách để lại số điện thoại sẽ tự vào danh sách Khách hàng.</p>
+      <p class="text-sm text-slate-400">Mọi cuộc trò chuyện khách đã nhắn ở khung tư vấn tự động trên website. Khách để lại số điện thoại sẽ tự vào danh sách Khách hàng.</p>
       <div class="grid md:grid-cols-[320px_1fr] gap-4 mt-3">
         <div id="ds-hoi-thoai" class="space-y-2 md:max-h-[70vh] overflow-y-auto"></div>
         <div id="xem-hoi-thoai" class="card rounded-2xl p-4 min-h-[300px] md:max-h-[70vh] overflow-y-auto"><p class="text-slate-500 text-sm">Chọn một cuộc trò chuyện để xem.</p></div>
@@ -108,8 +108,8 @@
     <!-- TRẢ LỜI TỰ ĐỘNG -->
     <div data-pane="tra-loi" class="hidden">
       <div class="card rounded-2xl p-4 text-sm text-slate-300 leading-relaxed">
-        Trợ lý <b class="text-gold">Mai</b> tự trả lời khách 24/7 trên website theo các câu dưới đây. Khi khách nhắn có chứa một trong các <b>từ khoá</b>, Mai gửi <b>câu trả lời</b> tương ứng.
-        Gõ <code class="text-gold">{ten}</code> để Mai tự gọi tên khách, <code class="text-gold">**chữ**</code> để in đậm. Sửa xong bấm <b>Lưu</b>, website cập nhật ngay.
+        Khung tư vấn <b class="text-gold">Phạm Dinh</b> tự trả lời khách 24/7 trên website theo các câu dưới đây. Khi khách nhắn có chứa một trong các <b>từ khoá</b>, Dinh gửi <b>câu trả lời</b> tương ứng.
+        Gõ <code class="text-gold">{ten}</code> để tự gọi tên khách, <code class="text-gold">**chữ**</code> để in đậm. Sửa xong bấm <b>Lưu</b>, website cập nhật ngay.
         <a href="index.html" target="_blank" class="text-gold underline">Mở website để thử trợ lý →</a>
       </div>
       <button id="them-tra-loi" class="mt-4 rounded-xl bg-cta text-ink font-black px-4 py-2.5 text-sm">＋ Thêm câu trả lời mới</button>
@@ -184,7 +184,7 @@ function napDuLieuMau() {
     { id: 'd4', created_at: t(60), ho_ten: 'Khách mẫu D', sdt: '0900000004', nganh: 'Tiếp thị liên kết (affiliate)', nhu_cau: 'Muốn làm video gắn giỏ hàng TikTok Shop', goi: '', so_tien: null, nguon: 'Trực tiếp', kenh: 'Chat', trang_thai: 'Đã liên hệ', phan_loai: 'Lạnh', ngay_cham_soc: congNgay(5), ghi_chu: 'Hẹn tháng sau' },
   ];
   DB.hoi_thoai = [
-    { id: 'h1', created_at: t(1), updated_at: t(1), phien: 'demo-1', sdt: '0900000001', nguon: 'Facebook', tin_nhan: [{ role: 'model', text: 'Chào bạn, Mai có thể giúp gì ạ?' }, { role: 'user', text: 'Học phí bao nhiêu vậy?' }, { role: 'model', text: 'Dạ, ưu đãi hôm nay chỉ còn 1.499.000đ ạ…' }, { role: 'user', text: 'số mình 0900000001' }] },
+    { id: 'h1', created_at: t(1), updated_at: t(1), phien: 'demo-1', sdt: '0900000001', nguon: 'Facebook', tin_nhan: [{ role: 'model', text: 'Chào bạn, Dinh có thể giúp gì ạ?' }, { role: 'user', text: 'Học phí bao nhiêu vậy?' }, { role: 'model', text: 'Dạ, ưu đãi hôm nay chỉ còn 1.499.000đ ạ…' }, { role: 'user', text: 'số mình 0900000001' }] },
     { id: 'h2', created_at: t(8), updated_at: t(8), phien: 'demo-2', sdt: null, nguon: 'TikTok', tin_nhan: [{ role: 'model', text: 'Chào bạn…' }, { role: 'user', text: 'mình bán bất động sản có làm được không' }] },
   ];
   DB.tra_loi_tu_dong = [
@@ -400,7 +400,7 @@ function veTraLoi() {
         <label class="flex items-center gap-1 text-xs whitespace-nowrap"><input type="checkbox" data-f="bat" ${r.bat ? 'checked' : ''}> Đang bật</label>
       </div>
       <label class="block text-xs text-slate-400">Từ khoá khách hay nhắn (cách nhau bằng dấu phẩy, có dấu hay không dấu đều được)<input class="inp mt-1" data-f="tu_khoa" value="${esc(r.tu_khoa)}"></label>
-      <label class="block text-xs text-slate-400">Câu Mai trả lời<textarea class="inp mt-1" rows="5" data-f="tra_loi">${esc(r.tra_loi)}</textarea></label>
+      <label class="block text-xs text-slate-400">Câu trả lời tự động<textarea class="inp mt-1" rows="5" data-f="tra_loi">${esc(r.tra_loi)}</textarea></label>
       <label class="block text-xs text-slate-400">Nút gợi ý cho khách bấm tiếp (cách nhau bằng dấu phẩy, có thể để trống)<input class="inp mt-1" data-f="goi_y" value="${esc(r.goi_y)}"></label>
       <div class="flex flex-wrap gap-3 items-center">
         <label class="flex items-center gap-1 text-sm"><input type="checkbox" data-f="nut_zalo" ${r.nut_zalo ? 'checked' : ''}> Kèm nút "Vào nhóm Zalo"</label>
@@ -408,7 +408,7 @@ function veTraLoi() {
         <button class="ml-auto rounded-lg border border-red-500/50 text-red-400 px-3 py-1.5 text-sm" data-act="xoa">Xoá</button>
         <button class="rounded-lg bg-cta text-ink font-black px-4 py-1.5 text-sm" data-act="luu">Lưu</button>
       </div>
-    </div>`).join('') || '<p class="text-slate-500">Chưa có câu trả lời nào – Mai sẽ dùng kịch bản có sẵn.</p>';
+    </div>`).join('') || '<p class="text-slate-500">Chưa có câu trả lời nào – website sẽ dùng kịch bản có sẵn.</p>';
 }
 $('ds-tra-loi').addEventListener('click', async e => {
   const the = e.target.closest('[data-tl]'); if (!the) return;

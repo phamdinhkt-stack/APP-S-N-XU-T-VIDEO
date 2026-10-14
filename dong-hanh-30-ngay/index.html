@@ -830,6 +830,6 @@ new IntersectionObserver(([en]) => { sticky.style.transform = en.isIntersecting 
 const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
-<script src="tro-ly.js?v=10"></script>
+<script src="tro-ly.js?v=11"></script>
 </body>
 </html>
