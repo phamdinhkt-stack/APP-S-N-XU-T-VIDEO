@@ -12,7 +12,7 @@
     // Kết nối CRM (Supabase): lấy từ CONFIG trong index.html
     crm: window.CRM || null,
     // true = dùng câu trả lời sửa trong trang quản trị (Supabase); lỗi mạng thì tự dùng kịch bản có sẵn bên dưới.
-    dungKichBanQuanTri: true,
+    dungKichBanQuanTri: false,
     // Số giây chờ trước khi trợ lý chủ động chào khách
     chaoSau: 12,
   };
@@ -46,10 +46,10 @@
       tra: ['Chính vì {ten} bận nên mới cần hệ thống này đó ạ 🙌 Mình <b>không cần quay, không cần lộ mặt</b>: AI lo hình ảnh, giọng đọc và dựng video. Mỗi tuần chỉ cần khoảng 60 phút để sản xuất video cho cả tuần, đăng bài thì đã có quy trình tự động. Các buổi Zoom đều có bản ghi để xem lại nếu mình lỡ buổi nào ạ.'],
       nut: ['Lộ trình học thế nào?', 'Học phí bao nhiêu?'] },
     { id: 'lo_trinh', tu: ['lo trinh', 'zoom', 'buoi', 'hoc gi', 'noi dung', 'chuong trinh', 'gom nhung gi', 'gom gi', 'nhan duoc gi', 'hoc nhu the nao', 'hinh thuc'],
-      tra: ['Dạ, chương trình đồng hành 30 ngày với <b>5 buổi Zoom trực tiếp</b>:<br>1️⃣ Xây kênh & chọn ngách dễ đạt triệu view, xây kênh thương hiệu cá nhân<br>2️⃣ Tặng 10 skill video AI viral & hướng dẫn từng bước cách làm các dạng video<br>3️⃣ Tạo skill, dùng skill & nâng cấp skill theo nhu cầu của từng người<br>4️⃣ Sản xuất video tự động & đăng bài đa nền tảng<br>5️⃣ Tổng kết, chữa bài từng người & hỏi đáp 1-1<br><br>Xuyên suốt 30 ngày có <b>bài tập mỗi ngày</b> và <b>chữa bài cho từng người</b> ạ ✨'],
+      tra: ['Dạ, chương trình đồng hành 30 ngày với <b>5 buổi Zoom trực tiếp</b>:<br>1️⃣ Cài công cụ & làm video đầu tiên cho sản phẩm của bạn<br>2️⃣ Tặng 10 skill video AI viral & hướng dẫn từng bước cách làm các dạng video<br>3️⃣ Tạo skill, dùng skill & nâng cấp skill theo nhu cầu của từng người<br>4️⃣ Sản xuất video tự động & đăng bài đa nền tảng<br>5️⃣ Tổng kết, chữa bài từng người & hỏi đáp 1-1<br><br>Xuyên suốt 30 ngày có <b>bài tập mỗi ngày</b> và <b>chữa bài cho từng người</b> ạ ✨'],
       nut: ['Quà tặng là gì?', 'Học phí bao nhiêu?'] },
     { id: 'qua', tu: ['qua tang', 'nhan qua', 'qua gi', 'tang kem', 'tang gi', 'tool', 'skill', 'prompt', 'cong cu', 'phan mem', 'app'],
-      tra: ['Dạ, đăng ký chương trình mình được tặng 2 món ạ 🎁<br>• <b>Tool sản xuất video tự động</b> (trị giá 699.000đ): làm video bằng AI, không cần quay, không cần lộ mặt, được hướng dẫn cài đặt ngay trong buổi Zoom.<br>• <b>10 skill</b> sản xuất 10 dạng video khác nhau (trị giá 990.000đ), và mình còn được hướng dẫn chỉnh sửa, nâng cấp thành skill của riêng mình.<br><br>Trong nhóm Zalo riêng còn có thêm quà và tài liệu chia sẻ nữa đó {ten}.'],
+      tra: ['Dạ, đăng ký chương trình bạn được tặng 3 món ạ 🎁<br>• <b>Tool đa ngành review bán hàng</b> (trị giá 699.000đ)<br>• <b>Tool 1 ảnh xây kênh đa nền tảng</b> (trị giá 699.000đ)<br>• <b>10 skill video AI viral</b> (trị giá 990.000đ), kèm hướng dẫn nâng cấp thành skill của riêng bạn.<br><br>Cả 2 tool đều được hướng dẫn cài đặt và sử dụng ngay trong buổi Zoom ạ.'],
       zalo: true },
     { id: 'ket_qua', tu: ['hieu qua', 'ket qua', 'thanh cong', 'trieu view', 'len xu huong', 'dam bao', 'chac chan', 'bang chung', 'that khong'],
       tra: ['Câu hỏi rất đáng hỏi ạ 👍 Dinh đã tự kiểm chứng trên chính mình: mở <b>2 kênh mới tinh</b>, không quảng cáo, không người theo dõi, chỉ sau <b>5 ngày</b> đã vượt <b>2,2 triệu lượt xem</b> – có video đạt 1,3 triệu view. Ảnh chụp màn hình thật có ngay trên trang này đó ạ.<br><br>Dinh không dám hứa video nào cũng triệu view, vì còn tuỳ mình có làm bài đều không. Nhưng mình làm đúng hệ thống và có người sửa bài 1:1 thì cơ hội rất lớn ạ 💛'],
@@ -245,7 +245,7 @@
     if (!daMo) {
       daMo = true;
       const g = dangGo(); await doi(900); g.remove();
-      themTin(`Dạ, Dinh chào bạn 🌷 Đây là khung tư vấn tự động 24/7 của <b>Phạm Dinh AI</b>.<br><br>Bạn đang tìm hiểu chương trình <b>Đồng Hành 30 Ngày Xây Kênh & Video Triệu View</b> phải không ạ? Bạn có băn khoăn gì, cứ hỏi Dinh thoải mái nhé 😊`, 'bot');
+      themTin(`Dạ, Dinh chào bạn 🌷 Đây là khung tư vấn tự động 24/7 của <b>Phạm Dinh AI</b>.<br><br>Bạn đang tìm hiểu chương trình <b>Đồng Hành 30 Ngày – Làm Video Bán Hàng Bằng AI</b> phải không ạ? Bạn có băn khoăn gì, cứ hỏi Dinh thoải mái nhé 😊`, 'bot');
       lichSu.push({ role: 'model', text: 'Chào bạn, Dinh đây (tư vấn tự động 24/7 của Phạm Dinh AI). Bạn có băn khoăn gì cứ hỏi nhé.' });
       themNut(NUT_MAC_DINH);
     }
