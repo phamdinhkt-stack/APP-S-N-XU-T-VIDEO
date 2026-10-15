@@ -11,8 +11,8 @@
     zaloCaNhan: 'https://zalo.me/0915244329',
     // Kết nối CRM (Supabase): lấy từ CONFIG trong index.html
     crm: window.CRM || null,
-    // true = dùng câu trả lời sửa trong trang quản trị (Supabase). Tạm tắt cho tới khi cập nhật bản trên Supabase.
-    dungKichBanQuanTri: false,
+    // true = dùng câu trả lời sửa trong trang quản trị (Supabase); lỗi mạng thì tự dùng kịch bản có sẵn bên dưới.
+    dungKichBanQuanTri: true,
     // Số giây chờ trước khi trợ lý chủ động chào khách
     chaoSau: 12,
   };
@@ -79,7 +79,7 @@
   const boDau = s => ' ' + s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ') + ' ';
   const chon = arr => arr[Math.floor(Math.random() * arr.length)];
   let tenKhach = '';
-  const goi = s => s.replace(/\{ten\}/g, tenKhach ? `bạn ${tenKhach}` : 'mình').replace(/^(bạn|mình)/, c => c[0].toUpperCase() + c.slice(1));
+  const goi = s => s.replace(/\{ten\}/g, tenKhach ? `bạn ${tenKhach}` : 'bạn').replace(/^(bạn|mình)/, c => c[0].toUpperCase() + c.slice(1));
 
   function timTen(raw) {
     const m = raw.normalize('NFC').match(/(?:tên tôi là|tên mình là|tôi tên là|mình tên là|em tên là|tôi tên|mình tên|em tên|tên là)\s+(\p{L}+(?:\s+\p{L}+)?)/iu);
