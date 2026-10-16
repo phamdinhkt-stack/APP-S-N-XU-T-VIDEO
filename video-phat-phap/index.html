@@ -40,9 +40,11 @@
   .reveal.in { opacity: 1; transform: none; }
   details > summary::-webkit-details-marker { display: none; }
   details[open] .mui-ten { transform: rotate(45deg); }
+  .mui-xuong { animation: xuong 1.6s ease-in-out infinite; }
+  @keyframes xuong { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
   .go-chu::after { content: '▍'; animation: nhay 1s steps(1) infinite; color: #E9B949; }
   @keyframes nhay { 50% { opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .cta-pulse { animation: none; } .reveal { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .cta-pulse, .mui-xuong { animation: none; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
@@ -60,37 +62,21 @@
   <div class="blob bg-cam w-[520px] h-[520px] -top-40 -right-40"></div>
   <div class="blob bg-gold w-[420px] h-[420px] top-[45%] -left-40"></div>
 
-  <!-- ===== HERO ===== -->
-  <section class="relative max-w-6xl mx-auto px-4 pt-8 pb-12 sm:pt-12">
-    <div class="flex flex-wrap justify-center gap-2 text-[11px] sm:text-xs font-bold">
-      <span class="rounded-full border border-line bg-nau2 px-3 py-1.5">💻 Zoom 12h thứ 7 · 17/10</span>
-      <span class="rounded-full border border-line bg-nau2 px-3 py-1.5">🤖 Tự động 100%</span>
-      <span class="rounded-full border border-cam/60 bg-cam/10 text-cam px-3 py-1.5">🔥 Chỉ nhận 30 người</span>
-    </div>
-
-    <div class="relative mt-10 text-center max-w-4xl mx-auto">
-      <div class="absolute -inset-x-10 -top-16 h-80 hao-quang pointer-events-none"></div>
-      <p class="relative text-sm sm:text-base font-bold uppercase tracking-[.2em] text-gold">Workshop online qua Zoom</p>
-      <h1 class="relative mt-3 font-serif text-[30px] leading-[1.22] sm:text-[46px] lg:text-[56px] font-extrabold">
-        Tự tạo video Phật pháp<br>hoàn toàn tự động <span class="text-grad">từ A–Z</span><br>trên Muse.ai
-      </h1>
-      <div class="relative mt-6 inline-flex flex-col items-center rounded-2xl bg-gold text-ink px-5 py-2.5">
-        <span class="font-black uppercase text-base sm:text-xl">🎬 Video tạo ra hoàn toàn miễn phí</span>
-        <span class="text-xs sm:text-sm font-bold opacity-80">Không tốn một đồng nào cho mỗi video Muse làm cho bạn</span>
-      </div>
-      <p class="relative mt-6 text-base sm:text-lg text-kem/85 leading-relaxed max-w-2xl mx-auto">
-        Muse tự phân tích chủ đề đang viral, tự sáng tạo nội dung mới, tự chọn ảnh, tự đọc giọng, tự ghép nhạc, tự chèn chữ – ra <b class="text-white">video Phật pháp hoàn chỉnh</b>.
-        Bạn chỉ cần ra lệnh: <b class="text-gold2">"Tạo cho tôi 10 video"</b>.
-      </p>
-      <p class="relative mt-4 text-lg sm:text-2xl font-black text-white">Việc của bạn là giao việc.<br class="sm:hidden"> <span class="text-grad">Và thu hoạch.</span></p>
-      <div class="relative mt-7 flex flex-col sm:flex-row gap-3 justify-center items-center">
-        <a href="#dang-ky" class="cta-pulse inline-flex items-center justify-center rounded-2xl bg-cta text-ink font-black uppercase px-6 py-4 text-sm sm:text-base leading-snug text-center">
-          🪷 Giữ suất ngay
-        </a>
-        <a href="#video-mau" class="inline-flex items-center justify-center rounded-2xl border border-gold/60 text-gold2 font-bold px-6 py-4 text-sm sm:text-base">▶ Xem video thành phẩm</a>
-      </div>
-      <p class="relative mt-3 text-sm text-kem/60">Tặng kèm kho 100 ảnh Phật tuyệt đẹp · Skill + 1 buổi Zoom hướng dẫn</p>
-    </div>
+  <!-- ===== HERO: ít chữ, gợi tò mò, dẫn xuống video ===== -->
+  <section class="relative max-w-4xl mx-auto px-4 pt-14 pb-6 sm:pt-20 text-center">
+    <div class="absolute inset-x-0 top-0 h-96 hao-quang pointer-events-none"></div>
+    <p class="relative text-xs sm:text-sm font-bold uppercase tracking-[.3em] text-gold/90">🪷 Workshop · Muse.ai</p>
+    <h1 class="relative mt-5 font-serif text-[34px] leading-[1.2] sm:text-[52px] lg:text-[62px] font-extrabold">
+      Tự tạo video<br class="sm:hidden"> Phật pháp<br><span class="text-grad">tự động từ A–Z</span>
+    </h1>
+    <p class="relative mt-6 inline-block rounded-full bg-gold text-ink font-black uppercase px-5 py-2 text-sm sm:text-lg">🎬 Video tạo ra hoàn toàn miễn phí</p>
+    <p class="relative mt-8 text-lg sm:text-2xl text-kem/85 leading-relaxed">
+      Bạn chỉ gõ <b class="text-white">một câu</b>.<br>Phần còn lại… <b class="text-gold2">Muse làm hết.</b>
+    </p>
+    <a href="#video-mau" class="relative mt-10 inline-flex flex-col items-center gap-2 text-sm text-kem/60 hover:text-gold2 transition">
+      Xem Muse tự làm ra video như thế nào
+      <span class="mui-xuong text-2xl text-gold">↓</span>
+    </a>
   </section>
 
   <!-- ===== VIDEO THÀNH PHẨM ===== -->
