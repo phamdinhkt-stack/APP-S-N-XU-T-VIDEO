@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workshop Tự Động Tạo Video Phật Pháp Trên Muse.ai</title>
+<meta name="description" content="Tự tạo video Phật pháp hoàn toàn tự động từ A–Z trên Muse.ai. Tặng kho 100 ảnh Phật, skill tạo video và 1 buổi Zoom hướng dẫn lúc 12h thứ 7, ngày 17/10. Chỉ nhận 30 người.">
+<meta property="og:title" content="Tự tạo video Phật pháp tự động từ A–Z trên Muse.ai – hoàn toàn miễn phí">
+<meta property="og:description" content="Ra lệnh một câu, Muse tự làm 5–10 video Phật pháp hoàn chỉnh: ảnh, giọng đọc, nhạc, chữ. Việc của bạn là thu hoạch.">
+<meta property="og:image" content="images/bia-2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Noto+Serif:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'], serif: ['"Noto Serif"', 'Georgia', 'serif'] },
+        colors: {
+          ink: '#0E0805', nau: '#1A0F08', nau2: '#24150B', line: '#3A2513',
+          gold: '#E9B949', gold2: '#FFDF8A', cam: '#F08A24', kem: '#F6EBD9',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #0E0805; color: #F6EBD9; }
+  .text-grad { background: linear-gradient(90deg, #FFDF8A, #E9B949 45%, #F08A24); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .bg-cta { background: linear-gradient(90deg, #F08A24, #E9B949 60%, #FFDF8A); }
+  .card { background: linear-gradient(160deg, rgba(36,21,11,.94), rgba(26,15,8,.94)); border: 1px solid #3A2513; }
+  .glow { box-shadow: 0 0 0 1px rgba(233,185,73,.35), 0 24px 70px -24px rgba(240,138,36,.5); }
+  .hao-quang { background: radial-gradient(circle at 50% 35%, rgba(255,223,138,.35), rgba(240,138,36,.12) 35%, transparent 65%); }
+  .cta-pulse { animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(240,138,36,.55); } 50% { box-shadow: 0 0 0 14px rgba(240,138,36,0); } }
+  .blob { position: absolute; border-radius: 9999px; filter: blur(110px); opacity: .2; pointer-events: none; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .mui-ten { transform: rotate(45deg); }
+  .go-chu::after { content: '▍'; animation: nhay 1s steps(1) infinite; color: #E9B949; }
+  @keyframes nhay { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cta-pulse { animation: none; } .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+<!-- ===== THANH TRÊN CÙNG ===== -->
+<div class="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-line">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
+    <span class="text-kem/80">💻 Zoom <b class="text-gold">12h thứ 7 · 17/10</b></span>
+    <span class="text-cam font-bold">· Chỉ nhận 30 người</span>
+    <a href="#dang-ky" class="hidden sm:inline-flex rounded-full bg-cta text-ink font-black px-4 py-1.5 text-xs uppercase">Giữ suất</a>
+  </div>
+</div>
+
+<main class="relative overflow-x-clip">
+  <div class="blob bg-cam w-[520px] h-[520px] -top-40 -right-40"></div>
+  <div class="blob bg-gold w-[420px] h-[420px] top-[45%] -left-40"></div>
+
+  <!-- ===== HERO ===== -->
+  <section class="relative max-w-6xl mx-auto px-4 pt-8 pb-12 sm:pt-12">
+    <div class="flex flex-wrap justify-center gap-2 text-[11px] sm:text-xs font-bold">
+      <span class="rounded-full border border-line bg-nau2 px-3 py-1.5">💻 Zoom 12h thứ 7 · 17/10</span>
+      <span class="rounded-full border border-line bg-nau2 px-3 py-1.5">🤖 Tự động 100%</span>
+      <span class="rounded-full border border-cam/60 bg-cam/10 text-cam px-3 py-1.5">🔥 Chỉ nhận 30 người</span>
+    </div>
+
+    <div class="mt-8 grid lg:grid-cols-[1.2fr_.8fr] gap-10 items-center">
+      <div class="text-center lg:text-left">
+        <p class="text-sm sm:text-base font-bold uppercase tracking-[.2em] text-gold">Tự tạo video Phật pháp</p>
+        <h1 class="mt-3 font-serif text-[30px] leading-[1.22] sm:text-[46px] lg:text-[54px] font-extrabold">
+          Hoàn toàn tự động <span class="text-grad">từ A–Z</span><br>trên Muse.ai
+        </h1>
+        <p class="mt-4 inline-block rounded-xl bg-gold text-ink font-black uppercase px-4 py-1.5 text-base sm:text-xl">Hoàn toàn miễn phí</p>
+        <p class="mt-5 text-base sm:text-lg text-kem/85 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          Muse tự phân tích chủ đề đang viral, tự sáng tạo nội dung mới, tự chọn ảnh, tự đọc giọng, tự ghép nhạc, tự chèn chữ – ra <b class="text-white">video Phật pháp hoàn chỉnh</b>.
+          Bạn chỉ cần ra lệnh: <b class="text-gold2">"Tạo cho tôi 10 video"</b>.
+        </p>
+        <p class="mt-4 text-lg sm:text-2xl font-black text-white">Việc của bạn là giao việc.<br class="sm:hidden"> <span class="text-grad">Và thu hoạch.</span></p>
+        <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
+          <a href="#dang-ky" class="cta-pulse inline-flex items-center justify-center rounded-2xl bg-cta text-ink font-black uppercase px-6 py-4 text-sm sm:text-base leading-snug text-center">
+            🪷 Giữ suất ngay
+          </a>
+          <a href="#video-mau" class="inline-flex items-center justify-center rounded-2xl border border-gold/60 text-gold2 font-bold px-6 py-4 text-sm sm:text-base">▶ Xem video thành phẩm</a>
+        </div>
+        <p class="mt-3 text-sm text-kem/60">Tặng kèm kho 100 ảnh Phật tuyệt đẹp · Skill + 1 buổi Zoom hướng dẫn</p>
+      </div>
+
+      <!-- Video nổi bật -->
+      <div class="relative max-w-[300px] sm:max-w-[320px] mx-auto w-full">
+        <div class="absolute -inset-10 hao-quang pointer-events-none"></div>
+        <div class="relative card glow rounded-[28px] p-2.5">
+          <video class="vd w-full aspect-[9/16] rounded-[20px] bg-black object-cover" src="videos/video-1.mp4" poster="images/bia-1.jpg" controls playsinline preload="none"></video>
+        </div>
+        <div class="absolute -top-3 -right-2 sm:-right-6 rotate-6 rounded-2xl bg-cam text-white font-black px-3 py-2 text-xs sm:text-sm shadow-lg">Muse tạo tự động 100%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO THÀNH PHẨM ===== -->
+  <section id="video-mau" class="max-w-6xl mx-auto px-4 py-14 reveal scroll-mt-16">
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-cam">Không chỉnh sửa tay</p>
+    <h2 class="mt-2 text-center font-serif text-2xl sm:text-4xl font-extrabold leading-tight">Đây là video thành phẩm<br><span class="text-grad">từ Muse tạo tự động</span></h2>
+    <p class="mt-3 text-center text-kem/75 max-w-2xl mx-auto">Ảnh, giọng đọc, nhạc nền, chữ, chuyển động – tất cả do Muse tự làm. Bấm vào để xem (nhớ bật tiếng 🔊).</p>
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <figure class="card rounded-3xl p-2.5 max-w-[300px] w-full mx-auto">
+        <video class="vd w-full aspect-[9/16] rounded-2xl bg-black object-cover" src="videos/video-1.mp4" poster="images/bia-1.jpg" controls playsinline preload="none"></video>
+        <figcaption class="px-2 py-3 text-center text-sm font-bold">Video 1 · 55 giây</figcaption>
+      </figure>
+      <figure class="card rounded-3xl p-2.5 max-w-[300px] w-full mx-auto">
+        <video class="vd w-full aspect-[9/16] rounded-2xl bg-black object-cover" src="videos/video-2.mp4" poster="images/bia-2.jpg" controls playsinline preload="none"></video>
+        <figcaption class="px-2 py-3 text-center text-sm font-bold">Video 2 · 46 giây</figcaption>
+      </figure>
+      <figure class="card rounded-3xl p-2.5 max-w-[300px] w-full mx-auto">
+        <video class="vd w-full aspect-[9/16] rounded-2xl bg-black object-cover" src="videos/video-3.mp4" poster="images/bia-3.jpg" controls playsinline preload="none"></video>
+        <figcaption class="px-2 py-3 text-center text-sm font-bold">Video 3 · 46 giây</figcaption>
+      </figure>
+    </div>
+    <p class="mt-8 text-center text-kem/80">Mỗi video một phong cách, <b class="text-gold2">không bị trùng lặp</b> – nhẹ nhàng, chân thật, vô cùng đẹp mắt.</p>
+  </section>
+
+  <!-- ===== MUSE LÀM HẾT ===== -->
+  <section class="max-w-6xl mx-auto px-4 py-14 reveal">
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-cam">Mọi thứ hoàn toàn tự động</p>
+    <h2 class="mt-2 text-center font-serif text-2xl sm:text-4xl font-extrabold leading-tight">Muse làm hết – <span class="text-grad">bạn không phải động tay</span></h2>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="card rounded-3xl p-6">
+        <p class="text-3xl">🔎</p>
+        <h3 class="mt-3 font-black text-lg">Tự bắt chủ đề Phật pháp đang viral</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Muse tự phân tích chủ đề Phật pháp đang viral rồi sáng tạo nội dung mới, tạo thành video hoàn thiện.</p>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <p class="text-3xl">🖼️</p>
+        <h3 class="mt-3 font-black text-lg">Tự lấy ảnh từ kho 100 ảnh Phật</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Kết nối vào kho ảnh, Muse tự chọn ảnh tạo video đa dạng, với hiệu ứng chuyển động nhẹ nhàng, chân thật – không bị trùng lặp.</p>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <p class="text-3xl">🎙️</p>
+        <h3 class="mt-3 font-black text-lg">Tự tạo giọng đọc Phật pháp</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Giọng đọc nhẹ nhàng, trầm ấm, <b class="text-white">đồng nhất 100%</b> ở mọi video – kênh của bạn có một "giọng" riêng.</p>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <p class="text-3xl">🎵</p>
+        <h3 class="mt-3 font-black text-lg">Tự động ghép nhạc</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Nhạc nền được ghép tự động vào video, không cần tìm nhạc, không cần cắt ghép.</p>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <p class="text-3xl">✍️</p>
+        <h3 class="mt-3 font-black text-lg">Tự động tạo chữ hoàn thiện</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Chữ trên video được tạo sẵn, khớp với lời đọc – xem không cần bật tiếng vẫn hiểu.</p>
+      </div>
+      <div class="card rounded-3xl p-6 border-gold/60">
+        <p class="text-3xl">🌾</p>
+        <h3 class="mt-3 font-black text-lg">Việc của bạn: giao việc &amp; thu hoạch</h3>
+        <p class="mt-2 text-sm text-kem/75 leading-relaxed">Không quay, không dựng, không viết kịch bản. Chỉ ra lệnh – rồi nhận video về đăng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHỈ CẦN 1 CÂU LỆNH ===== -->
+  <section class="max-w-5xl mx-auto px-4 py-14 reveal">
+    <div class="card glow rounded-3xl p-6 sm:p-10 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[.25em] text-cam">Điều đỉnh nhất</p>
+        <h2 class="mt-2 font-serif text-2xl sm:text-3xl font-extrabold leading-tight">Bạn chỉ cần <span class="text-grad">RA LỆNH</span></h2>
+        <p class="mt-4 text-kem/80 leading-relaxed">Gõ một câu: <b class="text-white">"Tạo cho tôi 5–10 video…"</b> – Muse tự động làm hết, từ nội dung đến video hoàn chỉnh.</p>
+        <p class="mt-4 text-xl font-black text-white">Việc của bạn là <span class="text-grad">THU HOẠCH.</span></p>
+      </div>
+      <div class="rounded-2xl border border-line bg-ink/70 p-4 sm:p-5 text-sm space-y-3" aria-label="Minh hoạ ra lệnh cho Muse">
+        <div class="flex justify-end"><p class="max-w-[85%] rounded-2xl rounded-br-sm bg-gold text-ink font-bold px-4 py-2.5">Tạo cho tôi 10 video Phật pháp</p></div>
+        <div class="flex gap-2">
+          <span class="shrink-0 w-8 h-8 rounded-full bg-cam/20 border border-cam/50 flex items-center justify-center">🪷</span>
+          <div class="rounded-2xl rounded-tl-sm bg-nau2 border border-line px-4 py-2.5 space-y-1.5">
+            <p class="font-bold text-gold2">Muse đang làm…</p>
+            <p>✔ Phân tích chủ đề Phật pháp đang viral</p>
+            <p>✔ Sáng tạo nội dung mới</p>
+            <p>✔ Lấy ảnh từ kho 100 ảnh Phật</p>
+            <p>✔ Tạo giọng đọc · ghép nhạc · tạo chữ</p>
+            <p class="font-bold text-white go-chu">10 video đã hoàn thiện </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BẠN NHẬN ĐƯỢC & GIÁ ===== -->
+  <section id="bao-gia" class="max-w-5xl mx-auto px-4 py-14 reveal scroll-mt-16">
+    <h2 class="text-center font-serif text-2xl sm:text-4xl font-extrabold leading-tight">Đăng ký hôm nay, bạn nhận được</h2>
+    <div class="mt-10 grid md:grid-cols-3 gap-4">
+      <div class="relative card glow rounded-3xl p-6">
+        <span class="absolute -top-3 left-6 rounded-full bg-cta text-ink text-xs font-black px-3 py-1">🧠 SKILL</span>
+        <h3 class="mt-2 font-black text-xl">Skill tạo video Phật pháp tự động</h3>
+        <p class="mt-3 text-sm text-kem/75">Cài vào Muse là dùng được: ra lệnh một câu, nhận 5–10 video hoàn chỉnh.</p>
+      </div>
+      <div class="relative card glow rounded-3xl p-6">
+        <span class="absolute -top-3 left-6 rounded-full bg-cta text-ink text-xs font-black px-3 py-1">💻 ZOOM</span>
+        <h3 class="mt-2 font-black text-xl">1 buổi Zoom hướng dẫn cách dùng</h3>
+        <p class="mt-3 text-sm font-bold text-gold2">🗓️ 12h trưa thứ 7, ngày 17/10</p>
+        <p class="mt-2 text-sm text-kem/75">Hướng dẫn từng bước trên Muse.ai, làm theo được ngay cả khi không rành công nghệ.</p>
+      </div>
+      <div class="relative card glow rounded-3xl p-6 border-gold/60">
+        <span class="absolute -top-3 left-6 rounded-full bg-cta text-ink text-xs font-black px-3 py-1">🎁 QUÀ TẶNG</span>
+        <h3 class="mt-2 font-black text-xl">Kho 100 ảnh Phật tuyệt đẹp</h3>
+        <p class="mt-3 text-sm text-kem/75">Kết nối vào Muse để tự động lấy ảnh tạo video đa dạng, không trùng lặp.</p>
+      </div>
+    </div>
+
+    <div class="mt-10 max-w-md mx-auto">
+      <div class="relative card glow rounded-3xl p-7 text-center border-2 border-gold">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-cta text-ink text-xs font-black px-3 py-1">GIÁ CHƯA BAO GIỜ CÓ</span>
+        <p class="mt-2 text-sm text-kem/60">Skill + 1 buổi Zoom + kho 100 ảnh Phật</p>
+        <p class="mt-2 text-lg text-kem/60"><s>299.000đ</s></p>
+        <p class="text-6xl sm:text-7xl font-black text-grad leading-none">55.000đ</p>
+        <p class="mt-3 text-sm font-bold text-cam">Giá ưu đãi duy nhất cho 30 người đầu tiên</p>
+        <a href="#dang-ky" class="cta-pulse mt-6 inline-flex w-full justify-center rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4">🪷 Giữ suất 55.000đ</a>
+        <p class="mt-3 text-xs text-kem/50">Đủ 30 người, giá trở về 299.000đ</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HỎI ĐÁP ===== -->
+  <section class="max-w-3xl mx-auto px-4 py-10 reveal">
+    <h2 class="text-center font-serif text-2xl sm:text-3xl font-extrabold">Câu hỏi thường gặp</h2>
+    <div class="mt-6 space-y-3">
+      <details class="card rounded-2xl p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold">Tôi không rành công nghệ, có làm được không?<span class="mui-ten text-gold text-xl leading-none transition">+</span></summary>
+        <p class="mt-3 text-sm text-kem/75">Được. Buổi Zoom hướng dẫn từng bước cách dùng. Sau khi cài xong, việc của bạn chỉ là gõ một câu lệnh.</p>
+      </details>
+      <details class="card rounded-2xl p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold">Buổi Zoom diễn ra khi nào?<span class="mui-ten text-gold text-xl leading-none transition">+</span></summary>
+        <p class="mt-3 text-sm text-kem/75"><b class="text-white">12h trưa thứ 7, ngày 17/10.</b> Sau khi chuyển khoản và gửi ảnh qua Zalo, bạn nhận link Zoom.</p>
+      </details>
+      <details class="card rounded-2xl p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold">Video có bị giống nhau không?<span class="mui-ten text-gold text-xl leading-none transition">+</span></summary>
+        <p class="mt-3 text-sm text-kem/75">Muse tự lấy ảnh từ kho 100 ảnh Phật và tạo hiệu ứng chuyển động khác nhau, nên mỗi video đa dạng, không bị trùng lặp. Bạn xem thử 3 video thành phẩm ở trên.</p>
+      </details>
+      <details class="card rounded-2xl p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold">Tôi thanh toán thế nào?<span class="mui-ten text-gold text-xl leading-none transition">+</span></summary>
+        <p class="mt-3 text-sm text-kem/75">Điền tên và số điện thoại ở form bên dưới, bạn nhận ngay mã QR chuyển khoản, số tiền đã điền sẵn. Quét bằng ứng dụng ngân hàng bất kỳ.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== FORM ĐĂNG KÝ ===== -->
+  <section id="dang-ky" class="max-w-3xl mx-auto px-4 py-14 scroll-mt-16">
+    <div class="card glow rounded-3xl p-6 sm:p-10 border-2 border-gold/70">
+      <div id="buoc-1">
+        <h2 class="text-center font-serif text-2xl sm:text-3xl font-extrabold">Giữ suất <span class="text-grad">55.000đ</span> ngay</h2>
+        <p class="mt-2 text-center text-sm text-kem/75">Chỉ mất 20 giây. Điền xong, bạn nhận ngay mã QR thanh toán đúng số tiền.</p>
+        <form id="form-dk" class="mt-6 space-y-4" novalidate>
+          <div>
+            <label for="ho-ten" class="block text-sm font-bold mb-1.5">Họ và tên *</label>
+            <input id="ho-ten" name="hoTen" type="text" maxlength="100" autocomplete="name" placeholder="Ví dụ: Nguyễn Thị Hoa" class="w-full rounded-xl bg-ink/70 border border-line px-4 py-3.5 focus:outline-none focus:border-gold">
+          </div>
+          <div>
+            <label for="sdt" class="block text-sm font-bold mb-1.5">Số điện thoại / Zalo *</label>
+            <input id="sdt" name="sdt" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel" placeholder="Ví dụ: 0912345678" class="w-full rounded-xl bg-ink/70 border border-line px-4 py-3.5 focus:outline-none focus:border-gold">
+          </div>
+          <p id="loi" class="hidden text-sm text-red-400 font-semibold"></p>
+          <button type="submit" class="cta-pulse w-full rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4 text-sm sm:text-base leading-snug">🪷 Giữ suất 55.000đ</button>
+          <p class="text-center text-xs text-kem/50">🔒 Thông tin chỉ dùng để liên hệ, gửi tài liệu và link Zoom cho bạn.</p>
+        </form>
+      </div>
+
+      <!-- Bước 2: thanh toán -->
+      <div id="buoc-2" class="hidden text-center">
+        <p class="text-xs font-bold uppercase tracking-widest text-gold">Bước 2/2 · Thanh toán giữ suất</p>
+        <h2 class="mt-2 text-2xl font-black">Cảm ơn <span id="tt-ten" class="text-grad"></span>!</h2>
+        <p class="mt-2 text-sm text-kem/75">Quét mã bằng ứng dụng ngân hàng bất kỳ. Số tiền và nội dung đã điền sẵn.</p>
+        <img id="qr" alt="Mã QR chuyển khoản" class="mt-5 mx-auto w-64 sm:w-72 rounded-2xl bg-white p-2">
+        <div class="mt-5 text-left max-w-sm mx-auto rounded-2xl border border-line bg-ink/60 p-4 text-sm space-y-1.5">
+          <p>Ngân hàng: <b id="tt-bank"></b></p>
+          <p>Số tài khoản: <b id="tt-stk"></b></p>
+          <p>Chủ tài khoản: <b id="tt-chu"></b></p>
+          <p>Số tiền: <b id="tt-tien" class="text-gold"></b></p>
+          <p>Nội dung: <b id="tt-nd" class="text-gold"></b></p>
+        </div>
+        <a id="nut-zalo" target="_blank" rel="noopener" class="mt-6 inline-flex w-full max-w-sm justify-center rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4">Đã chuyển khoản – Gửi ảnh qua Zalo</a>
+        <p class="mt-3 text-xs text-kem/50">Sau khi nhận ảnh chuyển khoản, chúng tôi gửi skill, kho 100 ảnh Phật và link Zoom (12h thứ 7, 17/10) cho bạn.</p>
+        <button id="quay-lai" type="button" class="mt-4 text-xs underline text-kem/50">Sửa lại thông tin</button>
+      </div>
+    </div>
+    <p class="mt-6 text-center text-sm text-kem/75">Cần hỏi thêm? Zalo / Hotline: <a class="font-bold text-gold" href="https://zalo.me/0915244329" target="_blank" rel="noopener">0915 244 329</a></p>
+  </section>
+
+  <footer class="border-t border-line py-8 pb-28 sm:pb-8 text-center text-xs text-kem/40 px-4">
+    <p>© <span id="nam"></span> Phạm Dinh AI · Workshop Tự Động Tạo Video Phật Pháp Trên Muse.ai</p>
+    <p class="mt-2">Zalo 0915 244 329</p>
+  </footer>
+</main>
+
+<!-- Sticky CTA trên điện thoại -->
+<div id="sticky-cta" class="sm:hidden fixed bottom-0 inset-x-0 z-50 p-3 bg-ink/95 backdrop-blur border-t border-line transition-transform">
+  <a href="#dang-ky" class="flex items-center justify-between gap-3 rounded-2xl bg-cta text-ink px-4 py-3">
+    <span class="leading-tight min-w-0"><span class="block text-[11px] font-bold opacity-80">Zoom 12h thứ 7 · 17/10</span><b class="text-sm">Chỉ nhận 30 người</b></span>
+    <span class="shrink-0 whitespace-nowrap font-black uppercase text-sm">Giữ suất →</span>
+  </a>
+</div>
+
+<script>
+/* =========================================================
+   CẤU HÌNH – CHỈ CẦN SỬA Ở ĐÂY
+   ========================================================= */
+const CONFIG = {
+  nganHang: { ma: 'MB', ten: 'MB Bank', stk: '0915244329', chu: 'PHAM THI DINH' },
+  zalo: '0915244329',
+  gia: 55000,
+  maNoiDung: 'PHATPHAP',
+  tenGoi: 'Workshop video Phật pháp (55k)',
+
+  // Ghi khách đăng ký vào CRM (cùng Supabase với trang Đồng Hành 30 Ngày). Để trống thì bỏ qua.
+  supabaseUrl: 'https://kgljgeqgfmfmyujbkvrf.supabase.co',
+  supabaseKey: 'sb_publishable_4wT3R02-9EEl1ikTIC-W7g_oM2RDReX',
+};
+
+// Nhận biết khách đến từ đâu
+const NGUON_KHACH = (() => {
+  const p = new URLSearchParams(location.search), ref = document.referrer.toLowerCase();
+  const tenNguon = { facebook: 'Facebook', fb: 'Facebook', ig: 'Instagram', instagram: 'Instagram', tiktok: 'TikTok', zalo: 'Zalo', google: 'Google', youtube: 'YouTube' };
+  const utm = (p.get('utm_source') || '').toLowerCase();
+  if (utm) return tenNguon[utm] || p.get('utm_source');
+  if (p.has('fbclid')) return 'Facebook';
+  if (p.has('ttclid')) return 'TikTok';
+  if (ref && !ref.includes(location.hostname)) {
+    const k = ['facebook', 'fb.', 'instagram', 'tiktok', 'zalo', 'google', 'youtube'].find(x => ref.includes(x));
+    return k ? tenNguon[k.replace('.', '')] : new URL(document.referrer).hostname.replace(/^www\./, '');
+  }
+  return 'Trực tiếp';
+})();
+const vnd = n => n.toLocaleString('vi-VN') + 'đ';
+document.getElementById('nam').textContent = new Date().getFullYear();
+
+// Chỉ phát một video một lúc
+const vds = document.querySelectorAll('video.vd');
+vds.forEach(v => v.addEventListener('play', () => vds.forEach(k => { if (k !== v) k.pause(); })));
+
+// Form đăng ký -> hiện QR thanh toán
+const form = document.getElementById('form-dk');
+const loi = document.getElementById('loi');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const hoTen = form.hoTen.value.trim();
+  const sdt = form.sdt.value.replace(/[\s.\-]/g, '');
+  if (hoTen.length < 2) return baoLoi('Vui lòng nhập họ và tên của bạn.', form.hoTen);
+  if (!/^(0|\+?84)\d{9}$/.test(sdt)) return baoLoi('Số điện thoại / Zalo chưa đúng (ví dụ: 0912345678).', form.sdt);
+  loi.classList.add('hidden');
+
+  const tien = CONFIG.gia, b = CONFIG.nganHang;
+  const noiDung = `${sdt} ${CONFIG.maNoiDung}`;
+
+  if (CONFIG.supabaseUrl && CONFIG.supabaseKey) {
+    fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/ghi_khach`, {
+      method: 'POST', headers: { apikey: CONFIG.supabaseKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_ho_ten: hoTen, p_sdt: sdt, p_nganh: 'Video Phật pháp', p_nhu_cau: '',
+        p_goi: CONFIG.tenGoi, p_so_tien: tien, p_nguon: NGUON_KHACH, p_kenh: 'Form Phật pháp', p_phien: null }),
+    }).catch(() => {});
+  }
+
+  document.getElementById('qr').src = `https://img.vietqr.io/image/${b.ma}-${b.stk}-compact2.png?amount=${tien}&addInfo=${encodeURIComponent(noiDung)}&accountName=${encodeURIComponent(b.chu)}`;
+  document.getElementById('tt-ten').textContent = hoTen;
+  document.getElementById('tt-bank').textContent = b.ten;
+  document.getElementById('tt-stk').textContent = b.stk;
+  document.getElementById('tt-chu').textContent = b.chu;
+  document.getElementById('tt-tien').textContent = vnd(tien);
+  document.getElementById('tt-nd').textContent = noiDung;
+  document.getElementById('nut-zalo').href = `https://zalo.me/${CONFIG.zalo}`;
+  document.getElementById('buoc-1').classList.add('hidden');
+  document.getElementById('buoc-2').classList.remove('hidden');
+  document.getElementById('dang-ky').scrollIntoView({ behavior: 'smooth' });
+});
+function baoLoi(msg, el) { loi.textContent = msg; loi.classList.remove('hidden'); el.focus(); }
+document.getElementById('quay-lai').addEventListener('click', () => {
+  document.getElementById('buoc-2').classList.add('hidden');
+  document.getElementById('buoc-1').classList.remove('hidden');
+});
+
+// Ẩn sticky CTA khi đang ở form đăng ký
+const sticky = document.getElementById('sticky-cta');
+new IntersectionObserver(([en]) => { sticky.style.transform = en.isIntersecting ? 'translateY(110%)' : ''; }, { threshold: 0.15 })
+  .observe(document.getElementById('dang-ky'));
+
+// Hiện dần khi cuộn
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
