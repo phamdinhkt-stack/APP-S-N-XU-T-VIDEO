@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build App Sản Xuất Video Chỉ Từ 1 Ảnh – Phạm Dinh AI</title>
+<meta name="description" content="Tự build app sản xuất video chỉ từ 1 ảnh mang tên của bạn: setup 10 luồng video cùng lúc, bấm một nút là rảnh tay chờ thành phẩm. Hoặc sở hữu ngay app để dùng. Ưu đãi 499.000đ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'] },
+        colors: {
+          ink: '#070B16', navy: '#0B1224', navy2: '#111A33', line: '#1E2A4A',
+          gold: '#F5B83D', gold2: '#FFD978', flame: '#FF5A1F', flame2: '#FF8A3D',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #070B16; color: #E8ECF6; }
+  .text-grad { background: linear-gradient(90deg, #FFD978, #F5B83D 40%, #FF8A3D 75%, #FF5A1F); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .bg-cta { background: linear-gradient(90deg, #FF5A1F, #FF8A3D 50%, #F5B83D); }
+  .card { background: linear-gradient(160deg, rgba(17,26,51,.92), rgba(11,18,36,.92)); border: 1px solid #1E2A4A; }
+  .glow { box-shadow: 0 0 0 1px rgba(245,184,61,.35), 0 20px 60px -20px rgba(255,90,31,.45); }
+  .cta-pulse { animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,138,61,.55); } 50% { box-shadow: 0 0 0 14px rgba(255,138,61,0); } }
+  .blob { position: absolute; border-radius: 9999px; filter: blur(110px); opacity: .22; pointer-events: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  /* Chỗ cần điền thông tin thật – nhìn thấy rõ để không quên thay trước khi chạy quảng cáo */
+  .can-dien { outline: 1px dashed #F5B83D; outline-offset: 2px; background: rgba(245,184,61,.12); border-radius: 4px; padding: 0 3px; }
+  .no-draft .can-dien { outline: none; background: none; padding: 0; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  .goi-radio:checked + .goi-the { border-color: #F5B83D; background: rgba(245,184,61,.08); }
+  .goi-radio:checked + .goi-the .goi-dau { background: #F5B83D; border-color: #F5B83D; }
+  .goi-radio:focus-visible + .goi-the { outline: 2px solid #FFD978; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .cta-pulse { animation: none; } .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+<!-- ===== THANH TRÊN CÙNG ===== -->
+<div class="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-line">
+  <div class="max-w-6xl mx-auto px-4 py-2 flex items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
+    <span class="text-slate-300">🔥 Ưu đãi <s class="text-slate-500">699.000đ</s> <b class="text-gold">còn 499.000đ</b> · Tặng 5 skill trị giá 499.000đ</span>
+    <a href="#dang-ky" class="hidden sm:inline-flex rounded-full bg-cta text-ink font-black px-4 py-1.5 text-xs uppercase">Đăng ký</a>
+  </div>
+</div>
+
+<main class="relative overflow-x-clip">
+  <div class="blob bg-flame w-[520px] h-[520px] -top-40 -right-40"></div>
+  <div class="blob bg-gold w-[420px] h-[420px] top-[55%] -left-40"></div>
+
+  <!-- ===== HERO ===== -->
+  <section class="relative max-w-6xl mx-auto px-4 pt-8 pb-12 sm:pt-12">
+    <div class="flex flex-wrap justify-center lg:justify-start gap-2 text-[11px] sm:text-xs font-bold">
+      <span class="rounded-full border border-line bg-navy2 px-3 py-1.5">🖼️ Chỉ cần 1 ảnh</span>
+      <span class="rounded-full border border-line bg-navy2 px-3 py-1.5">⚙️ 10 luồng video cùng lúc</span>
+      <span class="rounded-full border border-flame/60 bg-flame/10 text-flame2 px-3 py-1.5">🏷️ App mang tên của bạn</span>
+      <span class="rounded-full border border-gold/60 bg-gold/10 text-gold2 px-3 py-1.5">📅 Zoom 20h · 22 &amp; 23/10</span>
+    </div>
+
+    <div class="mt-8 grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
+      <div class="text-center lg:text-left">
+        <h1 class="text-[28px] leading-[1.2] sm:text-[44px] lg:text-[50px] font-black uppercase tracking-tight">
+          Build app<br><span class="text-grad">sản xuất video</span><br>
+          <span class="bg-gold text-ink px-3 rounded-lg [box-decoration-break:clone] [-webkit-box-decoration-break:clone] leading-[1.45]">chỉ từ 1 ảnh</span>
+        </h1>
+        <p class="mt-5 text-lg sm:text-2xl font-extrabold text-white">Setup 10 luồng video cùng lúc – setup xong là rảnh tay ngồi đợi thành phẩm</p>
+        <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          Dinh hướng dẫn bạn <b class="text-white">tự tạo ra một app giống hệt app của Dinh</b> – mang <b class="text-gold2">tên của bạn</b>, cá nhân hoá đúng các dạng video bạn cần làm. Dùng cho công việc của bạn, hoặc <b class="text-white">đem bán như một sản phẩm thương mại</b>.
+        </p>
+        <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
+          <a href="#hai-goi" class="cta-pulse inline-flex items-center justify-center whitespace-nowrap rounded-2xl bg-cta text-ink font-black uppercase px-6 py-4 text-sm sm:text-base">⚡ Xem 2 gói – chỉ 499.000đ</a>
+          <a href="#demo" class="inline-flex items-center justify-center whitespace-nowrap rounded-2xl border border-gold/60 text-gold2 font-bold px-6 py-4 text-sm sm:text-base hover:bg-gold/10 transition">▶ Xem video demo app</a>
+        </div>
+      </div>
+
+      <!-- Ảnh chụp app thật -->
+      <figure class="relative">
+        <div class="card glow rounded-3xl p-2.5 sm:p-3">
+          <img src="images/app-10-luong.jpg" alt="Giao diện app sản xuất video từ 1 ảnh: 10 luồng video chạy cùng lúc" class="w-full rounded-2xl bg-white" width="972" height="934">
+        </div>
+        <figcaption class="mt-3 text-center text-xs sm:text-sm text-slate-400">Giao diện thật của app: chọn số luồng, số cảnh, phong cách hình ảnh → bấm <b class="text-slate-200">Render tất cả</b></figcaption>
+        <div class="absolute -top-3 -right-1 sm:-right-4 rotate-6 rounded-2xl bg-flame text-white font-black px-3 py-2 text-sm shadow-lg">10 luồng / 1 lần bấm</div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO DEMO ===== -->
+  <section id="demo" class="max-w-6xl mx-auto px-4 py-14 reveal scroll-mt-16">
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-gold">Xem app chạy thật</p>
+    <h2 class="mt-3 text-center text-2xl sm:text-4xl font-black uppercase leading-tight">Video demo app <span class="text-grad">sản xuất video từ 1 ảnh</span></h2>
+    <div class="mt-10 grid md:grid-cols-2 gap-5">
+      <div class="card rounded-3xl overflow-hidden">
+        <div class="relative aspect-video bg-black" data-yt="lZid1QTtbpM">
+          <button type="button" class="group absolute inset-0 w-full h-full" aria-label="Phát video: Làm hàng loạt video xây kênh chỉ với 1 bức ảnh">
+            <img src="images/demo-lZid1QTtbpM.jpg" alt="" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+            <span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-flame/90 flex items-center justify-center text-white text-2xl pl-1 shadow-lg group-hover:scale-110 transition">▶</span></span>
+          </button>
+        </div>
+        <p class="p-4 font-bold text-white">Làm hàng loạt video xây kênh chỉ với 1 bức ảnh</p>
+      </div>
+      <div class="card rounded-3xl overflow-hidden">
+        <div class="relative aspect-video bg-black" data-yt="HaI95YmN43Q">
+          <button type="button" class="group absolute inset-0 w-full h-full" aria-label="Phát video: Tool sản xuất hàng 100 video mỗi ngày">
+            <img src="images/demo-HaI95YmN43Q.jpg" alt="" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+            <span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-flame/90 flex items-center justify-center text-white text-2xl pl-1 shadow-lg group-hover:scale-110 transition">▶</span></span>
+          </button>
+        </div>
+        <p class="p-4 font-bold text-white">Tool sản xuất hàng 100 video mỗi ngày</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APP LÀM ĐƯỢC GÌ ===== -->
+  <section class="max-w-6xl mx-auto px-4 py-14 reveal">
+    <h2 class="text-center text-2xl sm:text-4xl font-black uppercase leading-tight">Một app, <span class="text-grad">làm thay cả đội sản xuất</span></h2>
+    <div class="mt-10 grid md:grid-cols-3 gap-4">
+      <div class="card rounded-3xl p-6">
+        <p class="text-4xl">🖼️</p>
+        <h3 class="mt-3 font-black text-lg text-white">Chỉ từ 1 ảnh</h3>
+        <p class="mt-2 text-sm sm:text-[15px] text-slate-300 leading-relaxed">Đưa vào <b class="text-white">một tấm ảnh</b> – app tự sản xuất video. Không quay, không dựng, không cần lộ mặt.</p>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <p class="text-4xl">⚙️</p>
+        <h3 class="mt-3 font-black text-lg text-white">10 luồng video cùng lúc</h3>
+        <p class="mt-2 text-sm sm:text-[15px] text-slate-300 leading-relaxed">Setup <b class="text-white">10 luồng video chạy song song</b>, mỗi luồng tối đa 10 cảnh. Chọn phong cách hình ảnh một lần cho cả loạt.</p>
+      </div>
+      <div class="card rounded-3xl p-6 border-gold/60">
+        <p class="text-4xl">☕</p>
+        <h3 class="mt-3 font-black text-lg text-white">Setup xong là rảnh tay</h3>
+        <p class="mt-2 text-sm sm:text-[15px] text-slate-300 leading-relaxed">Bấm <b class="text-white">"Render tất cả"</b> rồi đi làm việc khác. Quay lại là có thành phẩm, không phải ngồi canh từng video.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2 GÓI ===== -->
+  <section id="hai-goi" class="max-w-6xl mx-auto px-4 py-14 reveal scroll-mt-16">
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-gold">Chọn gói phù hợp với bạn</p>
+    <h2 class="mt-3 text-center text-2xl sm:text-4xl font-black uppercase leading-tight">Tự build app của riêng bạn<br><span class="inline-block mt-2 bg-gold text-ink px-3 rounded-lg">hay sở hữu app để dùng ngay?</span></h2>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-5 items-stretch">
+      <!-- Gói 1 -->
+      <div class="relative card glow rounded-3xl p-6 sm:p-8 border-2 border-gold flex flex-col">
+        <span class="absolute -top-3 left-6 rounded-full bg-cta text-ink text-xs font-black px-3 py-1">CHƯƠNG TRÌNH 1 · BUILD APP</span>
+        <h3 class="mt-3 text-2xl sm:text-3xl font-black text-white">Build app sản xuất video <span class="text-grad">mang tên bạn</span></h3>
+        <p class="mt-3 text-sm sm:text-base text-slate-300">Dành cho người muốn có <b class="text-white">sản phẩm của riêng mình</b> – dùng cho công việc, hoặc đem bán.</p>
+        <ul class="mt-5 space-y-3 text-sm sm:text-[15px] text-slate-200">
+          <li class="flex gap-3"><span class="text-gold font-black">✔</span><span>Được hướng dẫn <b class="text-white">tạo ra một app tương tự app của Dinh</b>: sản xuất video từ 1 ảnh, 10 luồng cùng lúc.</span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">✔</span><span><b class="text-white">Cá nhân hoá</b> theo đúng công việc và các dạng video bạn muốn làm.</span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">✔</span><span>App đặt <b class="text-white">tên của bạn</b> – là sản phẩm của bạn, <b class="text-white">được bán, làm sản phẩm thương mại</b>.</span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">🎁</span><span><b class="text-gold2">Tặng buổi hướng dẫn tạo skill</b> cho các dạng video khác nhau, đa ngành nghề <span class="text-slate-400">(trị giá 499.000đ)</span></span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">🎁</span><span><b class="text-gold2">Tặng 5 skill</b> các dạng video <span class="text-slate-400">(trị giá 499.000đ)</span></span></li>
+        </ul>
+        <div class="mt-6 rounded-2xl border border-gold/40 bg-gold/5 p-4 text-sm space-y-2">
+          <p class="font-black text-gold uppercase text-xs tracking-widest">📅 Lịch Zoom · 20h</p>
+          <p><b class="text-white">Buổi 1 · Thứ Năm 22/10:</b> <span class="text-slate-300">Build app sản xuất video từ 1 ảnh</span></p>
+          <p><b class="text-white">Buổi 2 · Thứ Sáu 23/10:</b> <span class="text-slate-300">Hướng dẫn tạo skill đa ngành nghề</span></p>
+          <p class="text-xs text-slate-400 pt-1">Cần chuẩn bị: máy tính + tài khoản Gemini Pro hoặc Ultra</p>
+        </div>
+        <div class="mt-auto pt-7 text-center">
+          <p class="text-sm text-slate-400">Tổng giá trị <s>1.697.000đ</s> · Giá gốc <s>699.000đ</s></p>
+          <p class="mt-1 text-5xl font-black text-grad">499.000đ</p>
+          <a href="#dang-ky" data-goi="build" class="chon-goi mt-5 inline-flex w-full justify-center rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4">Tôi muốn build app của tôi</a>
+        </div>
+      </div>
+
+      <!-- Gói 2 -->
+      <div class="relative card rounded-3xl p-6 sm:p-8 flex flex-col">
+        <span class="absolute -top-3 left-6 rounded-full bg-navy2 border border-gold/60 text-gold2 text-xs font-black px-3 py-1">CHƯƠNG TRÌNH 2 · SỞ HỮU APP</span>
+        <h3 class="mt-3 text-2xl sm:text-3xl font-black text-white">Sở hữu luôn app <span class="text-grad">để dùng</span></h3>
+        <p class="mt-3 text-sm sm:text-base text-slate-300">Dành cho người <b class="text-white">chỉ cần dùng</b> – không muốn tự build, muốn có app sản xuất video ngay.</p>
+        <ul class="mt-5 space-y-3 text-sm sm:text-[15px] text-slate-200">
+          <li class="flex gap-3"><span class="text-gold font-black">✔</span><span><b class="text-white">Sở hữu app</b> sản xuất video chỉ từ 1 ảnh để dùng cho công việc của bạn.</span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">✔</span><span>Setup <b class="text-white">10 luồng video cùng lúc</b>, setup xong là rảnh tay chờ thành phẩm.</span></li>
+          <li class="flex gap-3"><span class="text-gold font-black">🎁</span><span><b class="text-gold2">Tặng 5 skill</b> các dạng video <span class="text-slate-400">(trị giá 499.000đ)</span></span></li>
+        </ul>
+        <div class="mt-auto pt-7 text-center">
+          <p class="text-sm text-slate-400">Tổng giá trị <s>1.198.000đ</s> · Giá gốc <s>699.000đ</s></p>
+          <p class="mt-1 text-5xl font-black text-grad">499.000đ</p>
+          <a href="#dang-ky" data-goi="app" class="chon-goi mt-5 inline-flex w-full justify-center rounded-2xl border-2 border-gold text-gold2 font-black uppercase px-5 py-4 hover:bg-gold/10 transition">Tôi muốn sở hữu app</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- So sánh nhanh -->
+    <div class="mt-8 card rounded-3xl overflow-hidden">
+      <table class="w-full text-sm sm:text-base">
+        <thead class="bg-navy2"><tr><th class="p-3 sm:p-4 text-left font-bold text-slate-300">Bạn nhận được</th><th class="p-3 sm:p-4 font-black text-gold">Build App</th><th class="p-3 sm:p-4 font-black text-gold2">Sở hữu App</th></tr></thead>
+        <tbody class="divide-y divide-line text-center">
+          <tr><td class="p-3 sm:p-4 text-left">App sản xuất video từ 1 ảnh, 10 luồng</td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4">✅</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">5 skill các dạng video <span class="text-slate-400 text-xs">(499k)</span></td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4">✅</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">Zoom build app <span class="text-slate-400 text-xs">(20h thứ Năm 22/10)</span></td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4 text-slate-600">—</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">Tự tạo app mang tên bạn</td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4 text-slate-600">—</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">Cá nhân hoá theo dạng video bạn làm</td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4 text-slate-600">—</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">Bán app như sản phẩm thương mại</td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4 text-slate-600">—</td></tr>
+          <tr><td class="p-3 sm:p-4 text-left">Zoom hướng dẫn tạo skill đa ngành <span class="text-slate-400 text-xs">(20h thứ Sáu 23/10 · 499k)</span></td><td class="p-3 sm:p-4">✅</td><td class="p-3 sm:p-4 text-slate-600">—</td></tr>
+          <tr class="bg-gold/10 font-black"><td class="p-3 sm:p-4 text-left">Học phí ưu đãi</td><td class="p-3 sm:p-4 text-gold">499.000đ</td><td class="p-3 sm:p-4 text-gold2">499.000đ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== VÌ SAO NÊN TỰ BUILD ===== -->
+  <section class="max-w-5xl mx-auto px-4 py-14 reveal">
+    <h2 class="text-center text-2xl sm:text-4xl font-black">Vì sao nên có <span class="text-grad">app của riêng mình?</span></h2>
+    <div class="mt-10 grid md:grid-cols-3 gap-4">
+      <div class="card rounded-3xl p-6"><p class="text-xs font-black uppercase tracking-widest text-gold">01 · Đúng việc của bạn</p><h3 class="mt-2 font-black text-lg">App làm đúng dạng video bạn cần</h3><p class="mt-2 text-sm text-slate-300">Bạn bán mỹ phẩm, làm bất động sản hay xây kênh – app được cá nhân hoá theo đúng loại video bạn làm mỗi ngày.</p></div>
+      <div class="card rounded-3xl p-6"><p class="text-xs font-black uppercase tracking-widest text-gold">02 · Thương hiệu của bạn</p><h3 class="mt-2 font-black text-lg">App mang tên bạn, không phải tên người khác</h3><p class="mt-2 text-sm text-slate-300">Bạn có trong tay một sản phẩm công nghệ của chính mình để giới thiệu với khách hàng, đối tác.</p></div>
+      <div class="card rounded-3xl p-6 border-gold/60"><p class="text-xs font-black uppercase tracking-widest text-gold">03 · Thêm nguồn thu</p><h3 class="mt-2 font-black text-lg">Bán app như một sản phẩm thương mại</h3><p class="mt-2 text-sm text-slate-300">App bạn tạo ra là của bạn – bạn được bán, làm sản phẩm thương mại cho người cần làm video.</p></div>
+    </div>
+    <div class="mt-6 rounded-3xl border border-gold/40 bg-gold/5 p-6 text-center">
+      <p class="text-base sm:text-lg text-slate-100">🧩 Kèm <b class="text-gold">buổi hướng dẫn tạo skill</b>: tự tạo skill cho các dạng video khác nhau, đa ngành nghề – để app của bạn làm được thêm nhiều loại video hơn theo thời gian.</p>
+    </div>
+  </section>
+
+  <!-- ===== NGƯỜI LÀM RA APP ===== -->
+  <section class="max-w-5xl mx-auto px-4 py-14 reveal">
+    <div class="card glow rounded-3xl p-6 sm:p-10 grid md:grid-cols-[220px_1fr] gap-8 items-center">
+      <img src="images/companion.jpg" alt="Phạm Dinh AI – người làm ra app" class="w-44 h-44 md:w-56 md:h-56 mx-auto rounded-full object-cover border-4 border-gold/70">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[.25em] text-gold">Người làm ra app này</p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-black"><span class="text-grad">Phạm Dinh AI</span></h2>
+        <p class="mt-1 text-slate-300">Người kinh doanh tự xây công cụ AI làm video</p>
+        <ul class="mt-5 space-y-2.5 text-sm sm:text-base">
+          <li class="flex gap-3"><span class="text-gold">★</span><span>Tự tay xây dựng <b class="text-white">5 ứng dụng AI sản xuất video tự động</b> đang được khách hàng sử dụng hằng ngày.</span></li>
+          <li class="flex gap-3"><span class="text-gold">★</span><span>Chính là người làm ra app sản xuất video từ 1 ảnh bạn thấy trong video demo ở trên – và sẽ hướng dẫn bạn tạo ra một app như vậy.</span></li>
+          <li class="flex gap-3"><span class="text-gold">★</span><span>Trực tiếp hỗ trợ người dùng qua Zoom và nhóm Zalo.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHẢN HỒI THẬT ===== -->
+  <section id="phan-hoi" class="max-w-6xl mx-auto px-4 py-14 reveal">
+    <p class="text-center text-xs font-bold uppercase tracking-[.25em] text-gold">Phản hồi thật từ khách hàng</p>
+    <h2 class="mt-3 text-center text-2xl sm:text-4xl font-black uppercase leading-tight">Khách đã dùng app của Dinh <span class="text-grad">nói gì?</span></h2>
+    <p class="mt-4 text-center text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">Ảnh chụp tin nhắn thật từ khách đã dùng các app AI làm video của Dinh. Tên và ảnh đại diện đã được che để giữ riêng tư cho khách.</p>
+    <div class="mt-10 columns-1 sm:columns-2 lg:columns-3 gap-4" id="testimonials"></div>
+  </section>
+
+  <!-- ===== BĂN KHOĂN ===== -->
+  <section class="max-w-4xl mx-auto px-4 py-14 reveal">
+    <h2 class="text-center text-2xl sm:text-4xl font-black">Có thể bạn đang <span class="text-grad">băn khoăn</span></h2>
+    <div class="mt-8 space-y-3">
+      <details class="card rounded-2xl p-5 group" open>
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold text-base sm:text-lg">"Hai chương trình khác nhau thế nào?"<span class="text-gold text-2xl leading-none group-open:rotate-45 transition">+</span></summary>
+        <div class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed space-y-2">
+          <p><b class="text-white">Build App</b>: bạn được hướng dẫn tự tạo ra một app tương tự, mang tên bạn, cá nhân hoá theo công việc của bạn và được đem bán. Kèm buổi hướng dẫn tạo skill và 5 skill.</p>
+          <p><b class="text-white">Sở hữu App</b>: bạn nhận app để dùng ngay cho công việc của mình, kèm 5 skill. Không bao gồm việc tự build và quyền bán app.</p>
+        </div>
+      </details>
+      <details class="card rounded-2xl p-5 group">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold text-base sm:text-lg">"Tôi không rành công nghệ, có build được app không?"<span class="text-gold text-2xl leading-none group-open:rotate-45 transition">+</span></summary>
+        <div class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p>Dinh hướng dẫn trực tiếp từng bước qua <b class="text-white">2 buổi Zoom</b>, bạn làm theo ngay trên máy của mình. Bạn chỉ cần chuẩn bị <b class="text-white">một máy tính</b> và <b class="text-white">tài khoản Gemini Pro hoặc Gemini Ultra</b>.</p>
+        </div>
+      </details>
+      <details class="card rounded-2xl p-5 group">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold text-base sm:text-lg">"App tạo ra có được bán không?"<span class="text-gold text-2xl leading-none group-open:rotate-45 transition">+</span></summary>
+        <div class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p>Có. Với chương trình <b class="text-white">Build App</b>, app bạn tạo ra mang tên bạn và là sản phẩm của bạn – bạn được bán, làm sản phẩm thương mại.</p>
+        </div>
+      </details>
+      <details class="card rounded-2xl p-5 group">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-bold text-base sm:text-lg">"Khi nào bắt đầu?"<span class="text-gold text-2xl leading-none group-open:rotate-45 transition">+</span></summary>
+        <div class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p><b class="text-white">Build App</b>: buổi 1 build app vào <b class="text-white">20h thứ Năm 22/10</b>, buổi 2 hướng dẫn tạo skill vào <b class="text-white">20h thứ Sáu 23/10</b>, đều qua Zoom.</p>
+          <p><b class="text-white">Sở hữu App</b>: sau khi chuyển khoản và gửi ảnh qua Zalo, Dinh liên hệ để gửi app và 5 skill cho bạn.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== FORM ĐĂNG KÝ ===== -->
+  <section id="dang-ky" class="max-w-3xl mx-auto px-4 py-14 scroll-mt-16">
+    <div class="card glow rounded-3xl p-6 sm:p-10 border-2 border-gold/70">
+      <div id="buoc-1">
+        <h2 class="text-center text-2xl sm:text-3xl font-black">Đăng ký <span class="text-grad">ngay hôm nay</span></h2>
+        <p class="mt-2 text-center text-sm text-slate-300">Chỉ mất 20 giây. Điền xong, bạn nhận ngay mã QR thanh toán đúng số tiền.</p>
+        <form id="form-dk" class="mt-6 space-y-4" novalidate>
+          <fieldset>
+            <legend class="block text-sm font-bold mb-2">Chọn chương trình *</legend>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <label class="block cursor-pointer">
+                <input type="radio" name="goi" value="build" class="goi-radio sr-only" checked>
+                <span class="goi-the flex gap-3 items-start rounded-xl border border-line bg-ink/70 p-4 transition">
+                  <span class="goi-dau mt-0.5 w-4 h-4 shrink-0 rounded-full border-2 border-slate-500"></span>
+                  <span><b class="block text-white">Build App mang tên bạn</b><span class="text-xs text-slate-400">+ buổi tạo skill + 5 skill</span><b class="block mt-1 text-gold">499.000đ</b></span>
+                </span>
+              </label>
+              <label class="block cursor-pointer">
+                <input type="radio" name="goi" value="app" class="goi-radio sr-only">
+                <span class="goi-the flex gap-3 items-start rounded-xl border border-line bg-ink/70 p-4 transition">
+                  <span class="goi-dau mt-0.5 w-4 h-4 shrink-0 rounded-full border-2 border-slate-500"></span>
+                  <span><b class="block text-white">Sở hữu App để dùng</b><span class="text-xs text-slate-400">+ 5 skill</span><b class="block mt-1 text-gold">499.000đ</b></span>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+          <div>
+            <label for="ho-ten" class="block text-sm font-bold mb-1.5">Họ và tên *</label>
+            <input id="ho-ten" name="hoTen" type="text" maxlength="100" autocomplete="name" placeholder="Ví dụ: Nguyễn Thị Hoa" class="w-full rounded-xl bg-ink/70 border border-line px-4 py-3.5 focus:outline-none focus:border-gold">
+          </div>
+          <div>
+            <label for="sdt" class="block text-sm font-bold mb-1.5">Số điện thoại / Zalo *</label>
+            <input id="sdt" name="sdt" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel" placeholder="Ví dụ: 0912345678" class="w-full rounded-xl bg-ink/70 border border-line px-4 py-3.5 focus:outline-none focus:border-gold">
+          </div>
+          <div>
+            <label for="nhu-cau" class="block text-sm font-bold mb-1.5">Bạn muốn làm loại video gì?</label>
+            <input id="nhu-cau" name="nhuCau" type="text" maxlength="300" placeholder="Ví dụ: video bán mỹ phẩm, video xây kênh thú cưng…" class="w-full rounded-xl bg-ink/70 border border-line px-4 py-3.5 focus:outline-none focus:border-gold">
+          </div>
+          <p id="loi" class="hidden text-sm text-red-400 font-semibold"></p>
+          <button type="submit" class="cta-pulse w-full rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4 text-sm sm:text-base">⚡ Đăng ký & nhận mã thanh toán</button>
+          <p class="text-center text-xs text-slate-400">🔒 Thông tin chỉ dùng để liên hệ hỗ trợ bạn.</p>
+        </form>
+      </div>
+
+      <!-- Bước 2: thanh toán (hiện sau khi gửi form) -->
+      <div id="buoc-2" class="hidden text-center">
+        <p class="text-xs font-bold uppercase tracking-widest text-gold">Bước 2/2 · Thanh toán</p>
+        <h2 class="mt-2 text-2xl font-black">Cảm ơn <span id="tt-ten" class="text-grad"></span>!</h2>
+        <p class="mt-2 text-sm text-slate-300">Quét mã bằng ứng dụng ngân hàng bất kỳ. Số tiền và nội dung đã điền sẵn.</p>
+        <img id="qr" alt="Mã QR chuyển khoản" class="mt-5 mx-auto w-64 sm:w-72 rounded-2xl bg-white p-2">
+        <div class="mt-5 text-left max-w-sm mx-auto rounded-2xl border border-line bg-ink/60 p-4 text-sm space-y-1.5">
+          <p>Ngân hàng: <b id="tt-bank"></b></p>
+          <p>Số tài khoản: <b id="tt-stk"></b></p>
+          <p>Chủ tài khoản: <b id="tt-chu"></b></p>
+          <p>Số tiền: <b id="tt-tien" class="text-gold"></b></p>
+          <p>Nội dung: <b id="tt-nd" class="text-gold"></b></p>
+        </div>
+        <a id="nut-zalo" target="_blank" rel="noopener" class="mt-6 inline-flex w-full max-w-sm justify-center rounded-2xl bg-cta text-ink font-black uppercase px-5 py-4">Đã chuyển khoản – Gửi ảnh qua Zalo</a>
+        <p class="mt-3 text-xs text-slate-400">Sau khi nhận ảnh chuyển khoản, Dinh liên hệ lại qua Zalo để gửi app / link Zoom (20h, 22 &amp; 23/10).</p>
+        <button id="quay-lai" type="button" class="mt-4 text-xs underline text-slate-400">Sửa lại thông tin</button>
+      </div>
+    </div>
+    <p class="mt-6 text-center text-sm text-slate-300">Cần hỏi thêm? Zalo / Hotline: <a class="font-bold text-gold" href="https://zalo.me/0915244329" target="_blank" rel="noopener">0915 244 329</a></p>
+  </section>
+
+  <footer class="border-t border-line py-8 pb-28 sm:pb-8 text-center text-xs text-slate-500 px-4">
+    <p>© <span id="nam"></span> Phạm Dinh AI · Build App Sản Xuất Video Chỉ Từ 1 Ảnh</p>
+    <p class="mt-2">Zalo 0915 244 329</p>
+  </footer>
+</main>
+
+<!-- Sticky CTA trên điện thoại -->
+<div id="sticky-cta" class="sm:hidden fixed bottom-0 inset-x-0 z-50 p-3 bg-ink/95 backdrop-blur border-t border-line transition-transform">
+  <a href="#hai-goi" class="flex items-center justify-between gap-3 rounded-2xl bg-cta text-ink px-4 py-3">
+    <span class="leading-tight min-w-0"><span class="block text-[11px] font-bold opacity-80"><s>699.000đ</s> · Tặng 5 skill</span><b class="text-sm">Chỉ còn 499.000đ</b></span>
+    <span class="shrink-0 whitespace-nowrap font-black uppercase text-sm">Chọn gói →</span>
+  </a>
+</div>
+
+<script>
+/* =========================================================
+   CẤU HÌNH – CHỈ CẦN SỬA Ở ĐÂY
+   ========================================================= */
+const CONFIG = {
+  nganHang: { ma: 'MB', ten: 'MB Bank', stk: '0915244329', chu: 'PHAM THI DINH' },
+  zalo: '0915244329',
+  goi: {
+    build: { ten: 'Build App 1 ảnh', tien: 499000, ma: 'BUILDAPP' },
+    app:   { ten: 'Sở hữu App 1 ảnh', tien: 499000, ma: 'APP1ANH' },
+  },
+
+  // Dùng chung CRM với trang Đồng Hành 30 Ngày – khách hiện trong admin.html với tên gói ở trên.
+  supabaseUrl: 'https://kgljgeqgfmfmyujbkvrf.supabase.co',
+  supabaseKey: 'sb_publishable_4wT3R02-9EEl1ikTIC-W7g_oM2RDReX',
+
+  // true = viền vàng nét đứt quanh các chỗ còn cần điền thông tin thật. Đổi thành false sau khi đã thay hết.
+  hienChoCanDien: false,
+
+  // Phản hồi khách hàng THẬT (ảnh trong images/ + câu trích nguyên văn). Danh sách trống thì phần này tự ẩn.
+  phanHoi: [
+    { nhan: 'Dễ dùng', loi: 'Cái của b tạo video đồ ăn OK lắm. Mới làm quen thôi nhưng thấy dễ', anh: 'phan-hoi-1.jpg' },
+    { nhan: 'Hết cạn ý tưởng', loi: 'Quá nhàn luôn, app đưa ra 10 ý tưởng tha hồ chọn, mà toàn ý tưởng chất lượng.', anh: 'phan-hoi-5.jpg' },
+    { nhan: 'Hỗ trợ nhiệt tình', loi: 'Bà là nhiệt tình nhất trong những người tôi mua sản phẩm. Support liên tục trên nhóm', anh: 'phan-hoi-2.jpg' },
+    { nhan: 'Đồng hành tận tâm', loi: 'Có giỏi cách mấy mà k có ng hỗ trợ cũng mệt lắm á c. Gặp c xem như e có quý nhân', anh: 'phan-hoi-3.jpg' },
+    { nhan: 'Chất lượng video', loi: 'Nó ngon đó c, voice cũng đồng bộ hơn', anh: 'phan-hoi-6.jpg' },
+    { nhan: 'Đáng đồng tiền', loi: 'Ở đời không có cái gì "Ngon, bổ, rẻ" mà e cảm nhận thấy sản phẩm của chị đạt được tiêu chí này á.', anh: 'phan-hoi-4.jpg' },
+  ],
+};
+
+const CRM = { url: CONFIG.supabaseUrl.replace(/\/$/, ''), key: CONFIG.supabaseKey };
+
+// Nhận biết khách đến từ đâu (ghi nhớ nguồn đầu tiên)
+const NGUON_KHACH = (() => {
+  try { const cu = localStorage.getItem('nguon-khach'); if (cu) return cu; } catch (e) {}
+  const p = new URLSearchParams(location.search), ref = document.referrer.toLowerCase();
+  const tenNguon = { facebook: 'Facebook', fb: 'Facebook', ig: 'Instagram', instagram: 'Instagram', tiktok: 'TikTok', zalo: 'Zalo', google: 'Google', youtube: 'YouTube' };
+  let n = '';
+  const utm = (p.get('utm_source') || '').toLowerCase();
+  if (utm) n = tenNguon[utm] || p.get('utm_source');
+  else if (p.has('fbclid')) n = 'Facebook';
+  else if (p.has('ttclid')) n = 'TikTok';
+  else if (p.has('gclid')) n = 'Google';
+  else if (ref && !ref.includes(location.hostname)) {
+    const k = ['facebook', 'fb.', 'instagram', 'tiktok', 'zalo', 'google', 'youtube'].find(x => ref.includes(x));
+    n = k ? tenNguon[k.replace('.', '')] : (new URL(document.referrer).hostname.replace(/^www\./, ''));
+  }
+  n = n || 'Trực tiếp';
+  try { localStorage.setItem('nguon-khach', n); } catch (e) {}
+  return n;
+})();
+const vnd = n => n.toLocaleString('vi-VN') + 'đ';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+if (!CONFIG.hienChoCanDien) document.body.classList.add('no-draft');
+document.getElementById('nam').textContent = new Date().getFullYear();
+
+// Video demo YouTube: chỉ tải khung phát khi bấm (trang nhẹ hơn)
+document.querySelectorAll('[data-yt]').forEach(khung => khung.querySelector('button').addEventListener('click', () => {
+  khung.innerHTML = `<iframe src="https://www.youtube.com/embed/${khung.dataset.yt}?autoplay=1&rel=0" title="Video demo app" class="absolute inset-0 w-full h-full" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+}));
+
+// Phản hồi khách hàng (ảnh chụp tin nhắn thật)
+if (!CONFIG.phanHoi.length) document.getElementById('phan-hoi').remove();
+else document.getElementById('testimonials').innerHTML = CONFIG.phanHoi.map(p => `
+  <figure class="card rounded-3xl overflow-hidden mb-4 break-inside-avoid">
+    <div class="p-5">
+      <span class="inline-block rounded-full bg-gold/15 border border-gold/40 text-gold2 text-xs font-bold px-3 py-1">${esc(p.nhan)}</span>
+      <blockquote class="mt-3 text-base font-semibold text-white leading-relaxed">“${esc(p.loi)}”</blockquote>
+      <p class="mt-2 text-gold text-sm">★★★★★</p>
+    </div>
+    <img src="images/${esc(p.anh)}" alt="Ảnh chụp tin nhắn của khách: ${esc(p.loi)}" loading="lazy" class="w-full border-t border-line">
+  </figure>`).join('');
+
+// Nút chọn gói ở bảng giá -> chọn sẵn trong form
+document.querySelectorAll('.chon-goi').forEach(a => a.addEventListener('click', () => {
+  document.querySelector(`input[name="goi"][value="${a.dataset.goi}"]`).checked = true;
+}));
+
+// Form đăng ký -> hiện QR thanh toán
+const form = document.getElementById('form-dk');
+const loi = document.getElementById('loi');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const hoTen = form.hoTen.value.trim();
+  const sdt = form.sdt.value.replace(/[\s.\-]/g, '');
+  const goi = CONFIG.goi[form.goi.value];
+  if (hoTen.length < 2) return baoLoi('Vui lòng nhập họ và tên của bạn.', form.hoTen);
+  if (!/^(0|\+?84)\d{9}$/.test(sdt)) return baoLoi('Số điện thoại / Zalo chưa đúng (ví dụ: 0912345678).', form.sdt);
+  loi.classList.add('hidden');
+
+  const noiDung = `${sdt} ${goi.ma}`;
+  const b = CONFIG.nganHang;
+
+  if (CRM.url && CRM.key) {
+    fetch(`${CRM.url}/rest/v1/rpc/ghi_khach`, {
+      method: 'POST', headers: { apikey: CRM.key, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_ho_ten: hoTen, p_sdt: sdt, p_nganh: '', p_nhu_cau: form.nhuCau.value.trim(),
+        p_goi: `${goi.ten} (499k)`, p_so_tien: goi.tien, p_nguon: NGUON_KHACH, p_kenh: 'Form Build App' }),
+    }).catch(() => {});
+  }
+
+  document.getElementById('qr').src = `https://img.vietqr.io/image/${b.ma}-${b.stk}-compact2.png?amount=${goi.tien}&addInfo=${encodeURIComponent(noiDung)}&accountName=${encodeURIComponent(b.chu)}`;
+  document.getElementById('tt-ten').textContent = hoTen;
+  document.getElementById('tt-bank').textContent = b.ten;
+  document.getElementById('tt-stk').textContent = b.stk;
+  document.getElementById('tt-chu').textContent = b.chu;
+  document.getElementById('tt-tien').textContent = `${vnd(goi.tien)} (${goi.ten})`;
+  document.getElementById('tt-nd').textContent = noiDung;
+  document.getElementById('nut-zalo').href = `https://zalo.me/${CONFIG.zalo}`;
+  document.getElementById('buoc-1').classList.add('hidden');
+  document.getElementById('buoc-2').classList.remove('hidden');
+  document.getElementById('dang-ky').scrollIntoView({ behavior: 'smooth' });
+});
+function baoLoi(msg, el) { loi.textContent = msg; loi.classList.remove('hidden'); el.focus(); }
+document.getElementById('quay-lai').addEventListener('click', () => {
+  document.getElementById('buoc-2').classList.add('hidden');
+  document.getElementById('buoc-1').classList.remove('hidden');
+});
+
+// Ẩn sticky CTA khi đang ở bảng giá / form
+const sticky = document.getElementById('sticky-cta');
+const dangThay = new Set();
+new IntersectionObserver(es => {
+  es.forEach(en => en.isIntersecting ? dangThay.add(en.target) : dangThay.delete(en.target));
+  sticky.style.transform = dangThay.size ? 'translateY(110%)' : '';
+}, { threshold: 0.15 }).observe(document.getElementById('dang-ky'));
+
+// Hiệu ứng hiện dần khi cuộn
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
