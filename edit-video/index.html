@@ -120,20 +120,6 @@
     </div>
   </section>
 
-  <!-- ===== CÔNG THỨC VIDEO VIRAL ===== -->
-  <section class="max-w-5xl mx-auto px-4 py-12 hien">
-    <h2 class="text-center text-3xl sm:text-5xl font-black leading-tight">Công thức edit <span class="chu-grad">video viral</span></h2>
-    <p class="mt-3 text-center text-nau/70 max-w-2xl mx-auto">Những nguyên tắc giữ chân người xem trên TikTok, Reels, Shorts – skill làm sẵn cho bạn trong từng video.</p>
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="the rounded-3xl p-6"><p class="text-3xl">⚡</p><h3 class="mt-2 font-black text-lg">Hook 3 giây đầu</h3><p class="mt-1 text-sm text-nau/70">Vài giây đầu quyết định người xem ở lại hay lướt qua – câu mở và hình mở phải gây tò mò ngay.</p></div>
-      <div class="the rounded-3xl p-6"><p class="text-3xl">✂️</p><h3 class="mt-2 font-black text-lg">Nhịp nhanh, cắt gọn</h3><p class="mt-1 text-sm text-nau/70">Không khoảng lặng, không câu thừa. Video ngắn mà đủ ý được xem hết nhiều hơn.</p></div>
-      <div class="the rounded-3xl p-6"><p class="text-3xl">💬</p><h3 class="mt-2 font-black text-lg">Luôn có phụ đề</h3><p class="mt-1 text-sm text-nau/70">Rất nhiều người lướt video khi tắt tiếng – không có phụ đề là mất họ.</p></div>
-      <div class="the rounded-3xl p-6"><p class="text-3xl">🎞️</p><h3 class="mt-2 font-black text-lg">Đổi hình liên tục</h3><p class="mt-1 text-sm text-nau/70">Cảnh chèn, zoom, đổi góc đều đặn để mắt người xem luôn có thứ mới.</p></div>
-      <div class="the rounded-3xl p-6"><p class="text-3xl">🎵</p><h3 class="mt-2 font-black text-lg">Cắt theo nhịp nhạc</h3><p class="mt-1 text-sm text-nau/70">Điểm cắt khớp nhịp nhạc làm video cuốn và chuyên nghiệp hơn hẳn.</p></div>
-      <div class="the rounded-3xl p-6"><p class="text-3xl">🔍</p><h3 class="mt-2 font-black text-lg">Điểm nhấn đúng chỗ</h3><p class="mt-1 text-sm text-nau/70">Zoom, đổi tốc độ, âm thanh nhấn vào câu quan trọng – người xem nhớ đúng điều bạn muốn nói.</p></div>
-    </div>
-  </section>
-
   <!-- ===== PHONG CÁCH EDIT ===== -->
   <section class="max-w-5xl mx-auto px-4 py-12 hien">
     <h2 class="text-center text-3xl sm:text-5xl font-black leading-tight">Nhiều <span class="chu-grad">phong cách edit</span></h2>
@@ -160,13 +146,6 @@
       </div>
       <p class="mt-5 text-nau/80 max-w-2xl mx-auto leading-relaxed">Tự tay xây dựng <b>5 ứng dụng AI sản xuất video tự động</b> đang được khách hàng dùng hằng ngày, và trực tiếp hỗ trợ người dùng qua Zoom và nhóm Zalo.</p>
     </div>
-  </section>
-
-  <!-- ===== PHẢN HỒI THẬT ===== -->
-  <section id="phan-hoi" class="max-w-6xl mx-auto px-4 py-14 hien">
-    <h2 class="text-center text-3xl sm:text-5xl font-black chu-grad">Khách hàng nói gì?</h2>
-    <p class="mt-3 text-center text-nau/70 max-w-2xl mx-auto">Ảnh chụp tin nhắn thật từ khách đã dùng sản phẩm AI và được Dinh hỗ trợ. Tên và ảnh đại diện đã được che để giữ riêng tư cho khách.</p>
-    <div class="mt-10 columns-1 sm:columns-2 lg:columns-3 gap-4" id="phan-hoi-ds"></div>
   </section>
 
   <!-- ===== ĐĂNG KÝ ===== -->
@@ -288,8 +267,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 document.getElementById('nam').textContent = new Date().getFullYear();
 document.getElementById('hien-gia').innerHTML = CONFIG.goi.tien ? vnd(CONFIG.goi.tien) : '<span class="can-dien text-base text-cam">[Giá – chờ Dinh chốt]</span>';
 
-if (!CONFIG.phanHoi.length) document.getElementById('phan-hoi').remove();
-else document.getElementById('phan-hoi-ds').innerHTML = CONFIG.phanHoi.map(p => `
+if (document.getElementById('phan-hoi-ds')) document.getElementById('phan-hoi-ds').innerHTML = CONFIG.phanHoi.map(p => `
   <figure class="the rounded-3xl overflow-hidden mb-4 break-inside-avoid">
     <div class="p-5">
       <span class="inline-block rounded-full bg-kem2 text-cam text-xs font-bold px-3 py-1">${esc(p.nhan)}</span>
